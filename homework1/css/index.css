@@ -1,0 +1,218 @@
+/*
+ * Name: index.css
+ * Author: zhuangqh
+ * Last Modify: zhuangqh 2015-10-8
+ */
+
+
+html, body {
+    background: #eaeaea url(../images/bg.png) repeat;
+    font-family: Georgia, Garamond, Serif;
+    color: #404040;
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+.nav {
+    padding: 10px;
+    box-shadow: 0 2px 5px #888888;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+.nav h1 {
+    margin: 0;
+}
+
+/* SLIDER */
+.slider {
+    background-color: black;
+    box-shadow: 2px 2px 5px #888888;
+    height: 500px;
+    width: 900px;
+    margin: 40px auto 0;
+    overflow: visible;
+    position: relative;
+}
+.mask {
+    overflow: hidden;
+    height: 500px;
+}
+.slider ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.slider li {
+    width: 900px;
+    height: 500px;
+    position: absolute;
+    top: -500px;
+    list-style: none;
+}
+
+.slider li:hover .tag {
+    left: 0;
+}
+
+.slider img {
+    width: 900px;
+    height: 500px;
+}
+.slider .sldr-itm1 {
+    -webkit-animation:cycle 25s linear infinite;
+    -moz-animation:cycle 25s linear infinite;
+    animation:cycle 25s linear infinite;
+}
+.slider .sldr-itm2 {
+    -webkit-animation:cycletwo 25s linear infinite;
+    -moz-animation:cycletwo 25s linear infinite;
+    animation:cycletwo 25s linear infinite;
+}
+.slider .sldr-itm3 {
+    -webkit-animation:cyclethree 25s linear infinite;
+    -moz-animation:cyclethree 25s linear infinite;
+    animation:cyclethree 25s linear infinite;
+}
+.slider .sldr-itm4 {
+    -webkit-animation:cyclefour 25s linear infinite;
+    -moz-animation:cyclefour 25s linear infinite;
+    animation:cyclefour 25s linear infinite;
+}
+.slider .sldr-itm5 {
+    -webkit-animation:cyclefive 25s linear infinite;
+    -moz-animation:cyclefive 25s linear infinite;
+    animation:cyclefive 25s linear infinite;
+}
+
+@keyframes cycle {
+    0%  { top:0px; }
+    4%  { top:0px; }
+    16% { top:0px; opacity:1; z-index:0; }
+    20% { top:500px; opacity:0; z-index:0; }
+    21% { top:-500px; opacity:0; z-index:-1; }
+    50% { top:-500px; opacity:0; z-index:-1; }
+    92% { top:-500px; opacity:0; z-index:0; }
+    96% { top:-500px; opacity:0; }
+    100%{ top:0px; opacity:1; }
+}
+@keyframes cycletwo {
+    0%  { top:-500px; opacity:0; }
+    16% { top:-500px; opacity:0; }
+    20% { top:0px; opacity:1; }
+    24% { top:0px; opacity:1; }
+    36% { top:0px; opacity:1; z-index:0; }
+    40% { top:500px; opacity:0; z-index:0; }
+    41% { top:-500px; opacity:0; z-index:-1; }
+    100%{ top:-500px; opacity:0; z-index:-1; }
+}
+@keyframes cyclethree {
+    0%  { top:-500px; opacity:0; }
+    36% { top:-500px; opacity:0; }
+    40% { top:0px; opacity:1; }
+    44% { top:0px; opacity:1; }
+    56% { top:0px; opacity:1; z-index:0; }
+    60% { top:500px; opacity:0; z-index:0; }
+    61% { top:-500px; opacity:0; z-index:-1; }
+    100%{ top:-500px; opacity:0; z-index:-1; }
+}
+@keyframes cyclefour {
+    0%  { top:-500px; opacity:0; }
+    56% { top:-500px; opacity:0; }
+    60% { top:0px; opacity:1; }
+    64% { top:0px; opacity:1; }
+    76% { top:0px; opacity:1; z-index:0; }
+    80% { top:500px; opacity:0; z-index:0; }
+    81% { top:-500px; opacity:0; z-index:-1; }
+    100%{ top:-500px; opacity:0; z-index:-1; }
+}
+@keyframes cyclefive {
+    0%  { top:-500px; opacity:0; }
+    76% { top:-500px; opacity:0; }
+    80% { top:0px; opacity:1; }
+    84% { top:0px; opacity:1; }
+    96% { top:0px; opacity:1; z-index:0; }
+    100%{ top:500px; opacity:0; z-index:0; }
+}
+
+.slider .tag {
+    background: rgba(0,0,0,.7);
+    width: 300px;
+    height: 60px;
+    bottom: 90px;
+    position: relative;
+    left: -320px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.slider .tag p {
+    color: #FFF;
+    font-size: 24px;
+    font-weight:300;
+    line-height: 60px;
+    margin: 0 0 0 20px;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+    position: relative;
+    top: -5px;
+    width: 900px;
+    height: 5px;
+    background: #000;
+    -webkit-animation:fullexpand 25s ease-out infinite;
+    -moz-animation:fullexpand 25s ease-out infinite;
+    animation:fullexpand 25s ease-out infinite;
+}
+
+@keyframes fullexpand {
+    0%, 20%, 40%, 60%, 80%, 100% { width:0%; opacity:0; }
+    4%, 24%, 44%, 64%, 84% { width:0%; opacity:0.3; }
+   16%, 36%, 56%, 76%, 96% { width:100%; opacity:0.7; }
+   17%, 37%, 57%, 77%, 97% { width:100%; opacity:0.3; }
+   18%, 38%, 58%, 78%, 98% { width:100%; opacity:0; }
+}
+
+/* CANDY MENU */
+.sweet-menu {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sweetmeats {
+    width: 900px;
+    border-collapse: collapse;
+}
+.sweetmeats th, .sweetmeats td {
+    border: 1px solid #A4A400;
+    text-align: center;
+}
+.sweetmeats th {
+    padding: 5px;
+    font-size: 20pt;
+    background-color: #B3B303;
+    color: #FFFFFF;
+}
+.sweetmeats td {
+    padding: 5px 10px 5px 5px;
+    font-size: 15pt;
+}
+.sweetmeats td a {
+    text-decoration: none;
+    color: #404040;
+}
+.sweetmeats td a:hover {
+    color: #0000FF;
+}
+.sweetmeats tr.alt td {
+    background-color: #EAF2D3;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+}
+.footer p {
+    font-size: 15pt;
+}
