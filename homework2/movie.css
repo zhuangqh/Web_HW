@@ -1,0 +1,135 @@
+/*
+ * Name: movie.css
+ * Author: zhuangqh
+ * Last modify: zhuangqh 2015-10-14
+ */
+
+body {
+	background-image: url(http://my.ss.sysu.edu.cn/wiki/download/attachments/7045968/background.png?version=1&modificationDate=1268896312000);
+	font-family: Verdana, Tahoma, sans-serif;
+	font-size: 8pt;
+	margin: 0;
+	padding: 0;
+}
+
+.banner {
+	height: 50px;
+	text-align: center;
+	background-image: url(http://my.ss.sysu.edu.cn/wiki/download/attachments/7045968/bannerbackground.png?version=1&modificationDate=1268896312000);
+	background-repeat: repeat-x;
+}
+
+h1#page-heading {
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 24pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+/*--------content---------*/
+.content {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 4px solid gray;
+}
+
+/*--------left section-------*/
+.cnt-left {
+	width: 550px;
+}
+
+.cnt-left-head {
+	height: 83px;
+	background-image: url(http://my.ss.sysu.edu.cn/wiki/download/attachments/7045968/rottenbackground.png?version=1&modificationDate=1268896385000);
+	background-repeat: repeat-x;
+	font-size: 8pt;
+	color: white;
+	margin-bottom: 11px;
+}
+.cnt-left-head img {
+	vertical-align: bottom;
+}
+
+.cnt-rating {
+	font-size: 48pt;
+	font-weight: bold;
+	color: red;
+}
+
+/*--------reviews in left section--------*/
+.cnt-reviews-left, .cnt-reviews-right {
+	width: 47%;
+	margin-left: 2%;
+	float: left;
+}
+
+.review {
+	border: 2px solid gray;
+	padding: 8px;
+	font-weight: bold;
+	background-color: #E1D697;
+	min-height: 25px;
+}
+
+.review p {
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: left;
+}
+.review img {
+	float: left;
+	margin-right: 5px;
+}
+.reviewer {
+	margin-bottom: 3em;
+}
+.reviewer img {
+	float: left;
+	margin-right: 5px;
+}
+.reviewer .name {
+	font-style: italic;
+}
+
+/*--------right section--------*/
+.cnt-right {
+	width: 250px;
+	float: right;
+}
+.cnt-right img {
+	vertical-align: bottom;
+}
+.cnt-list {
+	padding: 1em 10px 1em 10px;
+	background-color: #A2B964;
+	font-family: Arial, sans-serif;
+}
+.cnt-list dl {
+	margin: 0;
+}
+.cnt-list dt {
+	font-weight: bold;
+	margin-top: 1em;
+}
+.cnt-list #special-dt {
+	margin-top: 0;
+}
+
+/*--------伪footer--------*/
+.footer-bar {
+	text-align: center;
+	background-color: #A2B964;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	clear: both;
+}
+.footer-bar p {
+	margin: 0;
+}
+
+.vaildtor {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
