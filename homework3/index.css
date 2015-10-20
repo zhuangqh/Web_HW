@@ -1,0 +1,125 @@
+/*
+ * Author: zhuangqh
+ * Last modify: 2015-10-21
+ */
+body {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#at-plus-container {
+	position: fixed;
+	left: 40%;
+	bottom: 0;
+	width: 500px;
+	height: 600px;
+}
+
+ul {
+	list-style: none;
+}
+
+/*------info bar-------*/
+#info-bar {
+	position: relative;
+	width: 130px;
+	height: 130px;
+	background-color: rgba(0, 0, 0, .4);
+	border-radius: 50%;
+}
+#info-bar li {
+	position: absolute;
+}
+#info-bar li .count {
+	margin-left: 10px;
+	vertical-align: top;
+	font-weight: bold;
+}
+
+/*------info bar->page-------*/
+.page {
+	color: #FFF;
+}
+.user {
+	top: 10px;
+	left: 40px;
+}
+.comment {
+	top: 45px;
+	left: 30px;
+	font-size: 20pt;
+}
+
+/*------info bar->mine-------*/
+.mine {
+	color: #079E6E;
+}
+.posted {
+	top: 85px;
+	left: 20px;
+}
+.like {
+	top: 85px;
+	left: 70px;
+}
+
+/*------ring icon------*/
+.button {
+	background-color: rgba(0, 0, 0, .5);
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-size: 14px 14px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.mask {
+	background-image: url(assets/images/mask.png);
+
+}
+.history {
+	background-image: url(assets/images/history.png);
+}
+.message {
+	position: relative;
+	background-image: url(assets/images/message.png);
+}
+.unread {
+	position: absolute;
+	top: -5px;
+	right: -8px;
+	background-color: #EF3636;
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+	font-size: 9pt;
+	font-weight: bold;
+	color: #FFF;
+}
+.setting {
+	background-image: url(assets/images/setting.png);
+}
+.sign {
+	background-image: url(assets/images/signin.png);
+}
+
+/*--------apb----------*/
+.apb {
+	width: 30px;
+	height: 30px;
+	background-color: rgba(0, 0, 0, .5);
+	border-radius: 50%;
+	background-image: url(assets/images/atplus_white.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+
+/*-------ANIMATION--------*/
+.apb:hover {
+	width: 50px;
+	height: 50px;
+	background-color: rgba(48, 63, 159, 1);
+	background-image: url(assets/images/atplus_green.png);
+	background-size: 38px;
