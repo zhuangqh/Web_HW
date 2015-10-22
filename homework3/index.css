@@ -1,86 +1,109 @@
 /*
  * Author: zhuangqh
- * Last modify: 2015-10-21
+ * Description: Ring Menu
+ * Last modify: 2015-10-22
  */
+
 body {
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
 #at-plus-container {
 	position: fixed;
-	left: 40%;
+	left: 30%;
 	bottom: 0;
-	width: 500px;
-	height: 600px;
+	width: 300px;
+	height: 400px;
 }
-
 ul {
 	list-style: none;
 }
 
 /*------info bar-------*/
 #info-bar {
-	position: relative;
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 155px;
+	top: 150px;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, .5);
+	border-radius: 50%;
+	opacity: 0;
+	-webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+#button:hover #info-bar {
+	top: 0;
+	left: 85px;
 	width: 130px;
 	height: 130px;
-	background-color: rgba(0, 0, 0, .4);
-	border-radius: 50%;
+	opacity: 1;
 }
 #info-bar li {
-	position: absolute;
+	position: relative;
 }
-#info-bar li .count {
+.info span {
 	margin-left: 10px;
 	vertical-align: top;
 	font-weight: bold;
 }
+
 
 /*------info bar->page-------*/
 .page {
 	color: #FFF;
 }
 .user {
-	top: 10px;
-	left: 40px;
+	top: -5px;
 }
 .comment {
-	top: 45px;
-	left: 30px;
+	left: -10px;
 	font-size: 20pt;
 }
 
 /*------info bar->mine-------*/
 .mine {
-	color: #079E6E;
+	color: #54DCB1;
 }
 .posted {
-	top: 85px;
-	left: 20px;
+	top: 5px;
+	left: -25px;
 }
 .like {
-	top: 85px;
-	left: 70px;
+	top: -22px;
+	left: 30px;
 }
 
 /*------ring icon------*/
 .button {
 	background-color: rgba(0, 0, 0, .5);
+	position: absolute;
+	top: 150px;
+	left: 135px;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 	background-size: 14px 14px;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+	opacity: 0;
+	-webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 .mask {
 	background-image: url(assets/images/mask.png);
-
 }
 .history {
 	background-image: url(assets/images/history.png);
 }
 .message {
-	position: relative;
 	background-image: url(assets/images/message.png);
 }
 .unread {
@@ -95,7 +118,7 @@ ul {
 	text-align: center;
 	font-size: 9pt;
 	font-weight: bold;
-	color: #FFF;
+	color: rgba(255, 255, 255, .8);
 }
 .setting {
 	background-image: url(assets/images/setting.png);
@@ -104,22 +127,60 @@ ul {
 	background-image: url(assets/images/signin.png);
 }
 
-/*--------apb----------*/
+#button:hover #control-ring > li {
+	width: 30px;
+	height: 30px;
+	opacity: 1;
+}
+#button:hover .mask {
+	top: 110px;
+	left: 75px;
+}
+#button:hover .history {
+	top: 148px;
+	left: 65px;
+}
+#button:hover .message {
+	top: 185px;
+	left: 80px;
+}
+#button:hover .setting {
+	top: 208px;
+	left: 115px;
+}
+#button:hover .sign {
+	top: 205px;
+	left: 155px;
+}
+
+/*--------at plus button----------*/
 .apb {
 	width: 30px;
 	height: 30px;
-	background-color: rgba(0, 0, 0, .5);
+	position: absolute;
+	left: 135px;
+	top: 150px;
 	border-radius: 50%;
-	background-image: url(assets/images/atplus_white.png);
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
+	background: url(assets/images/atplus_white.png) no-repeat center;
+	background-color: rgba(0, 0, 0, .5);
+	-webkit-transition: all .2s .4s;
+    -moz-transition: all .2s .4s;
+    -ms-transition: all .2s .4s;
+    -o-transition: all .2s .4s;
+    transition: all .2s .4s;
 }
 
-
-/*-------ANIMATION--------*/
-.apb:hover {
+#button:hover .apb {
 	width: 50px;
 	height: 50px;
-	background-color: rgba(48, 63, 159, 1);
+	left: 125px;
+	top: 140px;
+	background-size: 80% 60%;
 	background-image: url(assets/images/atplus_green.png);
-	background-size: 38px;
+	background-color: rgba(48, 63, 159, 1);
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+}
