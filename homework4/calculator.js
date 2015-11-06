@@ -8,7 +8,7 @@ var expression = "";
 var leftPara = 0, rightPara = 0;
 var operators = ["+", "-", "*", "/"];
 var preIsOperator = false;
-
+var preIsDot = false;
 
 // bind event listener for buttons
 window.onload = function () {
@@ -78,6 +78,16 @@ function readIn(cc) {
     else
         preIsOperator = false;
 
+    // prevent the expression from adjacent dot
+    if (preIsDot && cc === ".") {
+        wrongInput(true);
+        return;
+    }
+    if (cc === ".")
+        preIsDot = true;
+    else
+        preIsDot = false;
+
     expression += cc;
     wrongInput(false);
     display();
@@ -85,8 +95,10 @@ function readIn(cc) {
 
 function computeAns() {
     try {
-        var ans = eval(expression);
-        expression = ans.toString();
+        if (expression) {
+            var ans = eval(expression);
+            expression = ans.toString();
+        }
     } catch(err) {
         alert("invalid expression!");
         expression = "";
@@ -96,6 +108,7 @@ function computeAns() {
     display();
     // initialize
     preIsOperator = false;
+    preIsDot = false;
     leftPara = rightPara = 0;
 }
 
@@ -104,6 +117,8 @@ function computeAns() {
 function delOne() {
 	if (preIsOperator)
 		preIsOperator = false;
+    if (preIsDot)
+        preIsDot = false;
 	wrongInput(false);
     if (expression != "") {
         expression = expression.substr(0, expression.length - 1);
@@ -115,6 +130,7 @@ function delOne() {
 function delAll() {
 	wrongInput(false);
 	preIsOperator = false;
+    preIsDot = false;
     expression = "";
     display();
 }
