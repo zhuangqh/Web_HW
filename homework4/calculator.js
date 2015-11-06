@@ -73,20 +73,21 @@ function readIn(cc) {
         wrongInput(true);
         return;
     }
-    if (isOperator)
+    if (isOperator) {
         preIsOperator = true;
-    else
+        preIsDot = false;
+    } else {
         preIsOperator = false;
+    }
 
     // prevent the expression from adjacent dot
     if (preIsDot && cc === ".") {
         wrongInput(true);
         return;
     }
-    if (cc === ".")
+    if (cc === ".") {
         preIsDot = true;
-    else
-        preIsDot = false;
+    }
 
     expression += cc;
     wrongInput(false);
@@ -96,8 +97,12 @@ function readIn(cc) {
 function computeAns() {
     try {
         if (expression) {
-            var ans = eval(expression);
+            var ans = eval(expression).toFixed(10);
             expression = ans.toString();
+            if (isNaN(ans)) {
+                alert("Not a number!");
+                expression = "";
+            }
         }
     } catch(err) {
         alert("invalid expression!");
@@ -108,18 +113,20 @@ function computeAns() {
     display();
     // initialize
     preIsOperator = false;
-    preIsDot = false;
+    var re = /./;
+    if (re.test(expression))
+        preIsDot = true;
+    else
+        preIsDot = false;
     leftPara = rightPara = 0;
 }
 
 // delete the last character from the expression
 // which is not empty
 function delOne() {
-	if (preIsOperator)
-		preIsOperator = false;
-    if (preIsDot)
-        preIsDot = false;
-	wrongInput(false);
+    if (preIsOperator)
+        preIsOperator = false;
+    wrongInput(false);
     if (expression != "") {
         expression = expression.substr(0, expression.length - 1);
         display();
@@ -128,8 +135,8 @@ function delOne() {
 
 // clean up the expression
 function delAll() {
-	wrongInput(false);
-	preIsOperator = false;
+    wrongInput(false);
+    preIsOperator = false;
     preIsDot = false;
     expression = "";
     display();
