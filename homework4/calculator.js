@@ -97,7 +97,7 @@ function readIn(cc) {
 function computeAns() {
     try {
         if (expression) {
-            var ans = eval(expression).toFixed(10);
+            var ans = parseFloat(eval(expression).toFixed(10));
             expression = ans.toString();
             if (isNaN(ans)) {
                 alert("Not a number!");
