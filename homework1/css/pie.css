@@ -34,9 +34,10 @@ a {
 ul {
     list-style: url(http://courses.cs.washington.edu/courses/cse190m/09sp/homework/1/pie_icon.gif);
 }
-blockquote {
+.cmt-question {
     background-color: #FFFFC8;
-    font-style: italic;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 .links-w3c {
     text-decoration: none;
