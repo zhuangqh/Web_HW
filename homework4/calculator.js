@@ -135,6 +135,8 @@ function delOne() {
         preIsOperator = false;
     wrongInput(false);
     if (expression != "") {
+        if (expression[expression.length - 1] === ".")
+            preIsDot = false;
         expression = expression.substr(0, expression.length - 1);
         display();
     }
