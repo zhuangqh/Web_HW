@@ -9,6 +9,8 @@ var leftPara = 0, rightPara = 0;
 var operators = ["+", "-", "*", "/"];
 var preIsOperator = false;
 var preIsDot = false;
+var equalIsPressed = false;
+
 
 // bind event listener for buttons
 window.onload = function () {
@@ -65,7 +67,7 @@ function readIn(cc) {
         }
     }
 
-    // prevent the expression from adjacent operators
+    // prevent the expression from invalid operators
     var isOperator = operators.some(function (item, index, array) {
         return item === cc;
     });
@@ -78,6 +80,9 @@ function readIn(cc) {
         preIsDot = false;
     } else {
         preIsOperator = false;
+        if (equalIsPressed) {
+            expression = "";
+        }
     }
 
     // prevent the expression from adjacent dot
@@ -91,6 +96,7 @@ function readIn(cc) {
 
     expression += cc;
     wrongInput(false);
+    equalIsPressed = false;
     display();
 }
 
@@ -113,6 +119,7 @@ function computeAns() {
     display();
     // initialize
     preIsOperator = false;
+    equalIsPressed = true;
     var re = /./;
     if (re.test(expression))
         preIsDot = true;
