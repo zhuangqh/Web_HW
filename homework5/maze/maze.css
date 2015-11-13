@@ -1,0 +1,182 @@
+/**
+ * @Author: zhuangqh
+ * @Email: zhuangqhc@gmail.com
+ * @Create on: 2015-11-11 15:48:34
+ */
+
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: 'Century Gothic';
+}
+
+#game-container {
+	width: 950px;
+	height: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#game-container h1 {
+	font-weight: lighter;
+	margin-bottom: 15px;
+}
+
+#game-container p {
+	font-size: 18pt;
+}
+
+#game-container > p {
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
+#game-container #notice {
+	height: 50px;
+}
+
+#game-container #notice p {
+	margin: 0;
+}
+
+#maze {
+	position: relative;
+	width: 498px;
+	height: 298px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#maze:hover {
+	cursor: pointer;
+}
+
+#maze .block {
+	position: absolute;
+	background-color: #EEEEEE;
+	border: 1px solid black;
+}
+
+#maze .block:hover {
+	cursor: default;
+}
+
+#maze div:nth-of-type(1) {
+	width: 150px;
+	height: 49px;
+	border-width: 1px 0 0 1px;
+}
+
+#maze div:nth-of-type(2) {
+	width: 200px;
+	height: 48px;
+	left: 149.5px;
+	border-width: 1px 0 1px 0;
+}
+
+#maze div:nth-of-type(3) {
+	width: 149px;
+	height: 49px;
+	left: 348px;
+	border-width: 1px 1px 0 0;
+}
+
+#maze div:nth-of-type(4) {
+	width: 149px;
+	height: 150px;
+	top: 49px;
+	border-width: 0 1px 1px 1px;
+}
+
+#maze div:nth-of-type(5) {
+	width: 149px;
+	height: 150px;
+	top: 49px;
+	right: 0;
+	border-width: 0 1px 1px 1px;
+}
+
+#start {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background-color: #80FF82;
+	top: 200px;
+	left: 0;
+	font-size: 20pt;
+	line-height: 40px;
+	border: 1px solid black;
+}
+
+#maze div:nth-of-type(7) {
+	width: 98px;
+	height: 149px;
+	top: 100px;
+	left: 200px;
+	border-width: 1px 1px 0 1px;
+}
+
+#end {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background-color: #6865B6;
+	top: 200px;
+	right: 0;
+	font-size: 20pt;
+	line-height: 40px;
+	border: 1px solid black;
+}
+
+#maze div:nth-of-type(9) {
+	width: 200px;
+	height: 48px;
+	bottom: 0;
+	border-width: 1px 0 1px 1px;
+}
+
+#maze div:nth-of-type(10) {
+	width: 100px;
+	height: 48px;
+	left: 200px;
+	bottom: 0;
+	border-width: 0 0 1px 0;
+}
+
+#maze div:nth-of-type(11) {
+	width: 198px;
+	height: 48px;
+	right: 0;
+	bottom: 0;
+	border-width: 1px 1px 1px 0;
+}
+
+#maze .block-changed {
+	background-color: red;
+}
+
+/* ------- game-guide --------*/
+#game-guide {
+	width: 580px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: justify;
+}
+
+#game-guide p {
+	font-size: 11pt;
+}
+#game-guide #block {
+	width: 100px;
+	height: 25px;
+	border: 1px solid black;
+	background-color: #EEEEEE;
+	margin-left: auto;
+	margin-right: auto;
+}

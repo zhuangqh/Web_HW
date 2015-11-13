@@ -1,0 +1,101 @@
+/**
+ * @Author: zhuangqh
+ * @Email: zhuangqhc@gmail.com
+ * @Create on: 2015-11-12 22:52:26
+ */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Century Gothic", sans-serif;
+}
+
+#game-container {
+    width: 700px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#game-container h1 {
+    font-weight: lighter;
+    text-align: center;
+    font-size: 18pt;
+}
+
+#notice > p {
+    text-align: center;
+}
+
+#board {
+    position: relative;
+    width: 280px;
+    height: 55px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#board .game-info {
+    position: absolute;
+    right: 0;
+}
+
+#board .game-info input {
+    width: 35px;
+    height: 18px;
+}
+
+#board div:nth-of-type(1) {
+    top: 0;
+}
+
+#board div:nth-of-type(2) {
+    bottom: 0;
+}
+
+#sta-end {
+    position: absolute;
+    width: 150px;
+    height: 18px;
+    left: 0;
+    top: 0;
+    font-size: 9pt;
+}
+
+#game-over {
+    position: absolute;
+    width: 130px;
+    height: 20px;
+    bottom: 0;
+    left: 0;
+}
+
+#whac-a-mole {
+    width: 235px;
+    height: 130px;
+    padding: 15px 0 15px 0;
+    margin: 30px auto 40px auto;
+    border: 1px solid #A8A8A8;
+    border-width: 1px 0 1px 0;
+}
+
+#whac-a-mole input {
+    width: 14px;
+    height: 14px;
+    margin-left: 3px;
+}
+
+/* The first element in each line */
+#whac-a-mole input:nth-of-type(10n + 1) {
+    margin-left: 2px;
+}
+
+#instructions h2 {
+    font-size: 12pt;
+    font-family: sans-serif;
+}
+
+#instructions ol li {
+    font-size: 10pt;
+    font-family: sans-serif;
+}
