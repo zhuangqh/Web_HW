@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset=utf-8>
 	<title>mole</title>
 	<link rel="stylesheet" type="text/css" href="mole.css">
 	<script type="text/javascript" src="mole.js"></script>
@@ -14,84 +15,21 @@
 		<div id="board">
 			<button id="sta-end" type="button">Start Game | Stop Game</button>
 			<div class="game-info">
-				Time: <input type="text" value="0">
+				Time: <input type="text" value="30" name="time">
 			</div>
-			<input id="game-over" value="Game Over">
+			<input name="game-status" value="Game Over" id="game-status">
 			<div class="game-info">
-				Score: <input type="text" value="0">
+				Score: <input type="text" value="0" name="score">
 			</div>
 		</div>
 	</div>
 	<div id="whac-a-mole">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
-		<input type="radio">
 	</div>
 	<div id="instructions">
+		<h2>Instructions:</h2>
 		<ol>
-			<h2>Instructions:</h2>
-			<blockquote>
-				<li>Click on the radio buttons(moles) as they are selected randomly
-				by the computer.</li>
-				<li>1 point per hit, minus 1 point per miss.</li>
-			</blockquote>
+			<li>Click on the radio buttons(moles) as they are selected randomlyby the computer.</li>
+			<li>1 point per hit, minus 1 point per miss.</li>
 		</ol>
 	</div>
 </div>

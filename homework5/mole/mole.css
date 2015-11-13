@@ -11,7 +11,7 @@ body, html {
 }
 
 #game-container {
-    width: 700px;
+    width: 650px;
     height: 450px;
     margin-left: auto;
     margin-right: auto;
@@ -62,7 +62,7 @@ body, html {
     font-size: 9pt;
 }
 
-#game-over {
+#game-status {
     position: absolute;
     width: 130px;
     height: 20px;
@@ -82,7 +82,8 @@ body, html {
 #whac-a-mole input {
     width: 14px;
     height: 14px;
-    margin-left: 3px;
+    margin-left: 7px;
+    border-color: #4E98EC;
 }
 
 /* The first element in each line */

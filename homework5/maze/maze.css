@@ -8,7 +8,7 @@ body, html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	font-family: 'Century Gothic';
+	font-family: 'Century Gothic', sans-serif;
 }
 
 #game-container {
@@ -33,14 +33,29 @@ body, html {
 	margin-top: 15px;
 }
 
-#game-container #notice {
+/*   game status    */
+#notice {
 	height: 50px;
+	font-size: 18pt;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
 }
 
-#game-container #notice p {
+#game-container .invisible {
+	opacity: 0;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
+}
+
+#notice p {
 	margin: 0;
 }
 
+/*     maze     */
 #maze {
 	position: relative;
 	width: 498px;

@@ -5,8 +5,7 @@
  */
 
 var gameStart = false,
-    hasCheat = false,
-    gameOver = false;
+    hasCheat = false;
 
 window.onload = function () {
     var start = document.getElementById('start'),
@@ -26,27 +25,36 @@ window.onload = function () {
 
 function startGame() {
     display("");
+    // change color
+    var blocks = document.getElementsByClassName('block block-changed');
+    for (var i = 0; i < blocks.length; ++i) {
+        blocks[i].className = blocks[i].className.replace(' block-changed', '');
+    }
     gameStart = true;
     hasCheat = false;
-    gameOver = false;
 }
 
 function endGame() {
-    if (!gameOver && (!gameStart || hasCheat)) {
+    if (!gameStart || hasCheat) {
         display("Don't cheat, you should start from the 'S' and move " +
             "to the 'E' inside the maze!");
-    } else if (gameStart && !gameOver) {
+    } else if (gameStart) {
         display("You win");
     }
 
+    // change color
+    var blocks = document.getElementsByClassName('block block-changed');
+    for (var i = 0; i < blocks.length; ++i) {
+        blocks[i].className = blocks[i].className.replace(' block-changed', '');
+    }
     gameStart = false;
     hasCheat = false;
 }
 
 function overBlock(event) {
-    if (!gameStart || gameOver) return;
+    if (!gameStart) return;
 
-    gameOver = true;
+    gameStart = false;
     var className = event.target.className;
     if (className.indexOf(' block-changed') == -1) {
         event.target.className += ' block-changed';
@@ -71,11 +79,14 @@ function outMaze () {
 
 function cheat() {
     hasCheat = true;
-
 }
 
 function display(info) {
     var notice = document.getElementById('notice');
-    var oP = notice.childNodes[1];
-    oP.textContent = info;
+    if (info == "") {
+        notice.className = 'invisible';
+    } else {
+        notice.className = '';
+        notice.textContent = info;
+    }
 }
