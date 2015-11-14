@@ -21,6 +21,11 @@ window.onload = function () {
 	}
 	document.getElementById('whac-a-mole').appendChild(inputFrag);
 	document.getElementById('sta-end').addEventListener('click', startGame);
+
+    // dont select anything when double click div/span/p
+    document.onselectstart = function () {
+        return false;
+    }
 }
 
 function hitMole(event) {
