@@ -10,7 +10,10 @@
         space: new Coordinate(3, 3),
         randomTime: 100,
         gameOver: true,
-        firstEnter: true
+        firstEnter: true,
+        timeIntervalId: null,
+        costTime: 0,
+        costStep: 0
     }
 
 	window.onload = function () {
@@ -33,6 +36,11 @@
         for (i = 0; i < panels.length; ++i) {
             panels[i].onclick = move;
         }
+
+        // dont select anything when double click div/span/p
+        document.onselectstart = function () {
+            return false;
+        }
 	}
 
     function Coordinate(x, y) {
@@ -43,7 +51,21 @@
         }
     }
 
+    function ticktock () {
+        ++puzzle.costTime;
+        showGameInfo('game-time', puzzle.costTime + 's');
+    }
+
+    function showGameInfo (info, status) {
+        document.getElementById(info).value = status;
+    }
+
 	function newGame() {
+        // count for playing time
+        if (puzzle.timeIntervalId)
+            clearInterval(puzzle.timeIntervalId);
+        puzzle.timeIntervalId = setInterval(ticktock, 1000);
+
         // start or restart
         if (puzzle.firstEnter) {
             document.getElementById('restart').textContent = '重新开始';
@@ -52,11 +74,17 @@
         } else {
             // check if wrong click
             if (!confirm('重新开始会清除当前的状态，重新生成拼图‚\n'
-                + '是否继续？ (误操作请按取消)'))
+                + '是否继续？ (误操作请按取消)')) {
                 return;
+            } else {
+                puzzle.costTime = 0;
+                showGameInfo('game-time', 0);
+            }
         }
 
         puzzle.gameOver = false;
+        puzzle.costStep = 0;
+        showGameInfo('game-step', 0);
         // randomly generate a valid puzzle
         for (var i = 0; i < puzzle.randomTime; ++i) {
             // go to the next step randomly
@@ -87,6 +115,9 @@
             }
 
             if (i != validSteps.length) {
+                // count for step
+                ++puzzle.costStep;
+                showGameInfo('game-step', puzzle.costStep + '步');
                 swapSpacePanel(validSteps[i]);
             }
 
@@ -103,7 +134,9 @@
         }
         // has win
         puzzle.gameOver = true;
-        alert('恭喜！你完成了拼图');
+        clearInterval(puzzle.timeIntervalId);
+        alert('恭喜！你完成了拼图\n' + '共用去' + puzzle.costTime + '秒, ' +
+            puzzle.costStep + '步');
     }
 
     function swapSpacePanel(nextStep) {

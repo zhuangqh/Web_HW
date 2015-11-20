@@ -20,8 +20,21 @@ body, html {
     transition: all .3s ease-in-out;
 }
 
+/* change the size when playing */
 .playing-container {
-    width: 940px !important;
+    width: 960px !important;
+}
+
+#game-status {
+	width: 400px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#game-status input {
+	width: 70px;
+	text-align: center;
 }
 
 #puzzle {
@@ -200,8 +213,12 @@ body, html {
 #origin {
     position: absolute;
     right: 0;
-    top: 67px;
+    width: 408px;
+    height: 408px;
+    top: 65px;
+    z-index: 1;
 }
+
 #origin img {
     width: 406px;
     height: 406px;
