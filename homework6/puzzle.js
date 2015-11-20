@@ -69,7 +69,8 @@
         // start or restart
         if (puzzle.firstEnter) {
             document.getElementById('restart').textContent = '重新开始';
-            document.getElementById('game-container').className = 'playing-container';
+            document.getElementsByClassName('game-container')[0].className += ' playing';
+            document.getElementById('puzzle').className = '';
             puzzle.firstEnter = false;
         } else {
             // check if wrong click
