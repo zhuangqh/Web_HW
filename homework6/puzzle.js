@@ -5,6 +5,8 @@
  */
 
 (function() {
+    'use strict';
+
     var puzzle = {
         level: 4,
         space: new Coordinate(3, 3),
@@ -14,10 +16,10 @@
         timeIntervalId: null,
         costTime: 0,
         costStep: 0
-    }
+    };
 
-	window.onload = function () {
-		var restartBtn = document.getElementById('restart'),
+    window.onload = function () {
+        var restartBtn = document.getElementById('restart'),
             puzzleBoard = document.getElementById('puzzle'),
             panelsFrag = document.createDocumentFragment();
 
@@ -41,7 +43,7 @@
         document.onselectstart = function () {
             return false;
         }
-	}
+    }
 
     function Coordinate(x, y) {
         this.row = x;
@@ -60,12 +62,7 @@
         document.getElementById(info).value = status;
     }
 
-	function newGame() {
-        // count for playing time
-        if (puzzle.timeIntervalId)
-            clearInterval(puzzle.timeIntervalId);
-        puzzle.timeIntervalId = setInterval(ticktock, 1000);
-
+    function newGame() {
         // start or restart
         if (puzzle.firstEnter) {
             document.getElementById('restart').textContent = '重新开始';
@@ -82,6 +79,11 @@
                 showGameInfo('game-time', 0);
             }
         }
+
+        // count for playing time
+        if (puzzle.timeIntervalId)
+            clearInterval(puzzle.timeIntervalId);
+        puzzle.timeIntervalId = setInterval(ticktock, 1000);
 
         puzzle.gameOver = false;
         puzzle.costStep = 0;
@@ -104,7 +106,7 @@
             nextStep = new Coordinate(puzzle.space.row, puzzle.space.col + 1);
             swapSpacePanel(nextStep);
         }
-	}
+    }
 
     function move() {
         if (!puzzle.gameOver) {
