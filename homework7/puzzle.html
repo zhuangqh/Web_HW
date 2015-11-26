@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>拼图游戏</title>
+	<link rel="stylesheet" type="text/css" href="puzzle.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js "></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+	<script type="text/javascript" src="puzzle.js"></script>
+</head>
+<body>
+<div class="game-container">
+	<h1>拼图游戏</h1>
+	<div id="puzzle" class="puzzle-invisible"></div>
+    <div id="origin">
+        <img src="puzzlePic.jpg" alt="puzzle">
+    </div>
+    <div id="game-status">
+    	游戏时间 <input id="game-time" type="text" value="0" disabled="disabled">
+    	已走步数 <input id="game-step" type="text" value="0" disabled="disabled">
+    </div>
+	<div id="controller">
+		<button id="restart">开始游戏</button>
+	</div>
+</div>
+</body>
+</html>
