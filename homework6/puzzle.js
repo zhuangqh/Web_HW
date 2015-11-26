@@ -43,7 +43,7 @@
         document.onselectstart = function () {
             return false;
         }
-    }
+    };
 
     function Coordinate(x, y) {
         this.row = x;

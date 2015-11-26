@@ -19,10 +19,11 @@
     $(function () {
         // dynamically create panel
         var panels = [];
-        _.times(puzzle.level*puzzle.level, function (i) {
+        _.times(puzzle.level*puzzle.level-1, function (i) {
             panels[i] = "<div id='panel" + i + "' class='panels' ></div>";
         });
         $('#puzzle').html(panels.join('\n'));
+        // bind event listener
         $('#restart').click(newGame);
         $('.panels').click(move);
     });
@@ -48,8 +49,7 @@
             puzzle.firstEnter = false;
         } else {
             // check if wrong click
-            if (!confirm('重新开始会清除当前的状态，重新生成拼图‚\n'
-                    + '是否继续？ (误操作请按取消)')) {
+            if (!confirm('重新开始会清除当前的状态，重新生成拼图‚\n是否继续？ (误操作请按取消)')) {
                 return;
             } else {
                 puzzle.costTime = 0;
@@ -72,10 +72,41 @@
         });
     }
 
+    function swapSpacePanel(nextStep) {
+        if (_.inRange(nextStep.row, puzzle.level) &&
+            _.inRange(nextStep.col, puzzle.level)) {
+            $('#panel' + nextStep.toIndex()).attr('id', 'panel' + puzzle.space.toIndex());
+            puzzle.space = nextStep;
+        }
+    }
+
     function move() {
         if (!puzzle.gameOver) {
-
+            var currentIndex = parseInt(this.id.replace(/[^0-9]/ig, ""));
+            var step = _.find(adjacentPanels(), function (item) {
+                return item.toIndex() == currentIndex;
+            });
+            if (step) {
+                ++puzzle.costStep;
+                $('#game-step').val(puzzle.costStep + '步');
+                swapSpacePanel(step);
+            }
+            checkWin();
         }
+    }
+
+    // check if win
+    function checkWin() {
+        $('.panels').each(function (i, item) {
+            if (parseInt(item.id.replace(/[^0-9]/ig, "")) != i)
+                return false;
+            if (i == 14) {
+                puzzle.gameOver = true;
+                clearInterval(puzzle.timeIntervalId);
+                alert('恭喜！你完成了拼图\n' + '共用去' + puzzle.costTime + '秒, ' +
+                puzzle.costStep + '步');
+            }
+        });
     }
 
     // compute panels around space
