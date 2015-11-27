@@ -1,0 +1,62 @@
+/**
+ * @Author: zhuangqh
+ * @Email: zhuangqhc@gmail.com
+ * @Create on: 2015/11/26
+ */
+
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body, html {
+    font-family: "Century Gothic", sans-serif;
+}
+
+table {
+    text-align: left;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #BFBFBF;
+}
+
+table th {
+    background-color: #031B7F;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* change color when table head was selected */
+.selected {
+    background-color: #A4B0FC;
+}
+
+tbody tr:nth-of-type(2n) {
+    background-color: #DDDDDD;
+}
+
+#todo {
+    width: 450px;
+}
+
+#staff {
+    width: 350px;
+}
+
+.sort-icon {
+    width: 16px;
+    height: 16px;
+    float: right;
+}
+
+.ascend {
+    background-image: url(ascend.png);
+}
+
+.descend {
+    background-image: url(descend.png);
+}
