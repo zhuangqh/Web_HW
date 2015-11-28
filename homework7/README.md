@@ -32,3 +32,5 @@
 - [smartoj](http://www.smartoj.com/p)
 - [smartoj set](http://www.smartoj.com/set/1)
 - [jobdu ranklist](http://ac.jobdu.com/ranklist.php)
+
+2015-11-28-20:32 更新：神秘代码可对纯数字、中文(？) 排序
