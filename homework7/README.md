@@ -24,5 +24,11 @@
 是用一个IIFE包装起来，这样就不会污染其他代码。
 
 ## Table sorter
+**notes:** 本人的mysticCode是按课程网站上说的——按字符串顺序排序
+
 可使用的网站列表：
-- soj.sysu.edu.cn
+- [swust ranklist](http://acm.swust.edu.cn/user/ranklist/)
+- [swust contest](http://acm.swust.edu.cn/contest/list/)
+- [smartoj](http://www.smartoj.com/p)
+- [smartoj set](http://www.smartoj.com/set/1)
+- [jobdu ranklist](http://ac.jobdu.com/ranklist.php)

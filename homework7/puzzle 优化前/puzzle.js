@@ -95,17 +95,6 @@
                 nextStep = validSteps[Math.floor(Math.random() * validSteps.length)];
             swapSpacePanel(nextStep);
         }
-
-        // move the space to the right-bottom corner
-        while (puzzle.space.row != puzzle.level - 1) {
-            nextStep = new Coordinate(puzzle.space.row + 1, puzzle.space.col);
-            swapSpacePanel(nextStep);
-        }
-
-        while (puzzle.space.col != puzzle.level - 1) {
-            nextStep = new Coordinate(puzzle.space.row, puzzle.space.col + 1);
-            swapSpacePanel(nextStep);
-        }
     }
 
     function move() {

@@ -38,7 +38,7 @@
             $tbody= $(this).parent().parent().parent().find('tbody'),
             rows = $tbody.find('tr').get(); // get DOM elements
         rows.sort(function (rowA, rowB) {
-            return rowA.cells[colIndex].textContent > rowB.cells[colIndex].textContent;
+            return rowA.cells[colIndex].textContent.localeCompare(rowB.cells[colIndex].textContent);
         });
         if (!isAscend) rows.reverse(); // descend order
 
