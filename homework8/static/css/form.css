@@ -1,0 +1,55 @@
+body, html {
+    margin: 0;
+}
+
+.wrapper {
+    width: 220px;
+    -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
+    -moz-box-shadow: 0 0 20px 5px #EEEEEE;
+    box-shadow: 0 0 20px 5px #EEEEEE;
+    border: #333333 solid 1px;
+    border-radius: 10px;
+    margin: 10px auto 0 auto;
+}
+
+
+form {
+    width: 190px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapper p {
+    text-align: center;
+    margin: 0;
+    font-size: 18pt;
+}
+
+.wrapper label {
+    float: left;
+    margin-top: 10px;
+}
+
+.wrapper input[type="text"] {
+    width: 186px;
+    height: 20px;
+}
+
+#reset, #submit {
+    width: 80px;
+    height: 30px;
+    color: #FFFFFF;
+    font-size: 13pt;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#reset {
+    background-color: #e63145;
+}
+
+#submit {
+    background-color: #38c41e;
+    margin-left: 10px;
+}
+

@@ -1,0 +1,24 @@
+//
+   Created by z on 2015/12/3.
+
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title register
+        link(href='/static/css/form.css', type='text/css', rel='stylesheet')
+    body
+        div.wrapper
+            p 注册
+            form(action='/register', method='post')
+                label(for='username') 用户名
+                input#username(name='username', type='text')
+                label(for='studentId') 学号
+                input#studentId(name='studentId', type='text')
+                label(for='phone') 电话
+                input#phone(name='phone', type='text')
+                label(for='mail') 邮箱
+                input#mail(name='mail', type='text')
+
+                input#reset(value='重置', type='reset')
+                input#submit(value='提交', type='submit')

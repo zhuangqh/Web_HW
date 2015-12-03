@@ -1,0 +1,11 @@
+{
+  "name": "signin",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./signin.js"
+  },
+  "dependencies": {
+    "jade": "~1.11.0"
+  }
+}
