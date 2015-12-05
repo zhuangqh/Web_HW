@@ -16,19 +16,7 @@ $(function () {
     })
     .change(errorHandler());
 
-    $('form').submit(function () {
-        var inputs = $("input[type='text']");
-        for (var i = 0; i < inputs.length; ++i) {
-            if (inputs.eq(i).val() == "") {
-                alert("您有某项未输入，请重新输入后再提交");
-                return false;
-            }
-        }
-        if ($('#reminder:visible').length) {
-            alert("您的输入不合法，请重新输入后再提交");
-            return false;
-        }
-    });
+    $('form').submit(validator);
 
     // 重置，隐藏错误提示
     $('#reset').click(function () {
@@ -65,5 +53,20 @@ function errorHandler() {
 
         if (!$reminder.find('p:visible').length)
             $reminder.hide();
+    }
+}
+
+// 判断能否提交
+function validator() {
+    var inputs = $("input[type='text']");
+    for (var i = 0; i < inputs.length; ++i) {
+        if (inputs.eq(i).val() == "") {
+            alert("您有某项未输入，请重新输入后再提交");
+            return false;
+        }
+    }
+    if ($('#reminder:visible').length) {
+        alert("您的输入不合法，请重新输入后再提交");
+        return false;
     }
 }
