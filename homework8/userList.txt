@@ -1,1 +1,0 @@
-{"username":"fuck","studentId":"fuck","phone":"fuck","mail":"fuck"}{"username":"21123","studentId":"12312","phone":"12312","mail":"123123"}{"username":"shit","studentId":"","phone":"","mail":""}

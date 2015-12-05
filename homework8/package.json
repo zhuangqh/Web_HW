@@ -1,6 +1,7 @@
 {
   "name": "signin",
   "version": "0.0.1",
+  "author": "zhuangqh",
   "private": true,
   "scripts": {
     "start": "node ./signin.js"

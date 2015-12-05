@@ -3,13 +3,15 @@ body, html {
 }
 
 #wrapper {
-    width: 220px;
+    width: 250px;
     -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
     -moz-box-shadow: 0 0 20px 5px #EEEEEE;
     box-shadow: 0 0 20px 5px #EEEEEE;
-    border: #333333 solid 1px;
+    border: #B5C4CF solid 1px;
     border-radius: 10px;
-    margin: 10px auto 0 auto;
+    margin: 300px auto 0 auto;
+    background-color: #DFF0FF;
+    color: #4398D8;
 }
 
 #wrapper > p {
@@ -18,7 +20,7 @@ body, html {
 }
 
 #details {
-    width: 130px;
+    width: 200px;
     margin: auto;
 }
 

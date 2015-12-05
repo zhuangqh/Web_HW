@@ -11,7 +11,9 @@ var handle = {
     "/register": requestHandlers.getStaticPage,
     "/register/addUser": requestHandlers.addUser,
     "/static/css/form.css": requestHandlers.getStaticFile,
-    "/static/css/details.css": requestHandlers.getStaticFile
+    "/static/css/details.css": requestHandlers.getStaticFile,
+    "/static/js/reminder.js": requestHandlers.getStaticFile,
+    "/static/js/jQuery.js": requestHandlers.getStaticFile
 };
 
 function route (pathname, query, response) {
@@ -20,10 +22,7 @@ function route (pathname, query, response) {
         handle[pathname](pathname, query, response);
     } else {
         console.log("No request handler found for " + pathname);
-        // otherwise, return to register page
-        response.writeHead(404, {'Content-Type': 'text/plain', 'charset':'utf-8'});
-        response.write("本次作业，你应该访问/?username来登陆，或者访问/register来注册");
-        response.end();
+        requestHandlers.pageNotFound(response);
     }
 }
 

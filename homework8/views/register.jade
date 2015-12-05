@@ -7,19 +7,26 @@ html
         meta(charset='utf-8')
         title register
         link(href='/static/css/form.css', type='text/css', rel='stylesheet')
+        script(src='/static/js/jQuery.js', type='text/javascript')
+        script(src='/static/js/reminder.js', type='text/javascript')
     body
-        block errorMessage
         #wrapper
             p 注册
             form(action='/register', method='post')
                 label(for='username') 用户名
-                input#username(name='username', type='text')
+                input#username(name='username', type='text', placeholder="6~18位英文字母、数字或下划线，英文字母开头")
                 label(for='studentId') 学号
-                input#studentId(name='studentId', type='text')
+                input#studentId(name='studentId', type='text', placeholder="8位非零开头数字")
                 label(for='phone') 电话
-                input#phone(name='phone', type='text')
+                input#phone(name='phone', type='text', placeholder="11位非零开头数字")
                 label(for='mail') 邮箱
-                input#mail(name='mail', type='text')
+                input#mail(name='mail', type='text', placeholder="邮箱地址")
 
                 input#reset(value='重置', type='reset')
                 input#submit(value='提交', type='submit')
+        #reminder
+            p#err1 用户名不合法，请重新输入
+            p#err2 学号不合法，请重新输入
+            p#err3 电话不合法，请重新输入
+            p#err4 邮箱不合法，请重新输入
+        block errorMessage

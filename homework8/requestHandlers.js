@@ -22,7 +22,7 @@ function queryToSignIn (pathname, query, response) {
         fs.readFile("./userList.txt", function (err, data) {
             if (err) {throw err;}
 
-            var re = new RegExp("\{\"username\":\"" + query.username + "\"[,\":\\w]*\}");
+            var re = new RegExp("\{\"username\":\"" + query.username + "\"[@,\.\":\\w\\d]*\}");
             var record = re.exec(data.toString());
 
             if (!record) { // 用户未注册
@@ -39,6 +39,7 @@ function queryToSignIn (pathname, query, response) {
 }
 
 function addUser(oPostData, response) {
+    console.log("About to add user");
     var userInfo = [oPostData.username, oPostData.studentId,
         oPostData.phone, oPostData.mail];
 
@@ -53,6 +54,7 @@ function addUser(oPostData, response) {
     fs.readFile("./userList.txt", function (err, data) {
         if (err) {throw err;}
 
+        // 查询是否有重复
         userInfo.forEach(function (element, index) {
             var strToMatch = "\"" + keys[index] + "\":\"" + userInfo[index] + "\"";
             if (data.toString().indexOf(strToMatch) != -1)
@@ -72,7 +74,7 @@ function addUser(oPostData, response) {
             // 显示重复的信息
             jade.renderFile("./views/registerError.jade", {errorMessage: duplicate}, function (err, html) {
                 if (err) {throw err;}
-                console.log(duplicate);
+
                 response.writeHead(200, {'Content-Type': 'text/html'});
                 response.end(html);
             });
@@ -115,7 +117,17 @@ function getStaticPage(filename, query, response) {
     });
 }
 
+// 404 指引页面
+function pageNotFound(response) {
+    jade.renderFile('./views/404.jade', function (err, html) {
+        if (err) {throw err;}
+        response.writeHead(404, {"Content-Type": "text/html"});
+        response.end(html);
+    });
+}
+
 exports.getStaticFile = getStaticFile;
 exports.queryToSignIn = queryToSignIn;
 exports.addUser = addUser;
 exports.getStaticPage = getStaticPage;
+exports.pageNotFound = pageNotFound;
