@@ -1,0 +1,8 @@
+//
+   Created by z on 2015/12/4.
+
+extends ./register.jade
+block errorMessage
+    #errorMessage
+        for error in errorMessage
+            p #{error}已存在，请重新输入

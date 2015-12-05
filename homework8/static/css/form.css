@@ -2,7 +2,7 @@ body, html {
     margin: 0;
 }
 
-.wrapper {
+#wrapper, #errorMessage {
     width: 220px;
     -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
     -moz-box-shadow: 0 0 20px 5px #EEEEEE;
@@ -12,6 +12,11 @@ body, html {
     margin: 10px auto 0 auto;
 }
 
+#errorMessage {
+    background-color: #FFF6F6;
+    color: #9C4240;
+    text-align: center;
+}
 
 form {
     width: 190px;
@@ -19,24 +24,24 @@ form {
     margin-right: auto;
 }
 
-.wrapper p {
+#wrapper p {
     text-align: center;
     margin: 0;
     font-size: 18pt;
 }
 
-.wrapper label {
+#wrapper label {
     float: left;
     margin-top: 10px;
 }
 
-.wrapper input[type="text"] {
+#wrapper input[type="text"] {
     width: 186px;
     height: 20px;
 }
 
 #reset, #submit {
-    width: 80px;
+    width: 90px;
     height: 30px;
     color: #FFFFFF;
     font-size: 13pt;
@@ -52,4 +57,3 @@ form {
     background-color: #38c41e;
     margin-left: 10px;
 }
-

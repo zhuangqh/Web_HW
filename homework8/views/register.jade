@@ -8,7 +8,8 @@ html
         title register
         link(href='/static/css/form.css', type='text/css', rel='stylesheet')
     body
-        div.wrapper
+        block errorMessage
+        #wrapper
             p 注册
             form(action='/register', method='post')
                 label(for='username') 用户名

@@ -5,8 +5,12 @@ doctype html
 html
     head
         meta(charset='utf-8')
-
+        link(href='/static/css/details.css', type='text/css', rel='stylesheet')
     body
-        div.wrapper
+        #wrapper
             p 详情
-            
+            #details
+                p 用户名：#{username}
+                p 学号：#{studentId}
+                p 电话：#{phone}
+                p 邮箱：#{email}

@@ -1,0 +1,27 @@
+body, html {
+    margin: 0;
+}
+
+#wrapper {
+    width: 220px;
+    -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
+    -moz-box-shadow: 0 0 20px 5px #EEEEEE;
+    box-shadow: 0 0 20px 5px #EEEEEE;
+    border: #333333 solid 1px;
+    border-radius: 10px;
+    margin: 10px auto 0 auto;
+}
+
+#wrapper > p {
+    text-align: center;
+    font-size: 13pt;
+}
+
+#details {
+    width: 130px;
+    margin: auto;
+}
+
+#details p {
+    text-align: left;
+}
