@@ -1,0 +1,161 @@
+/*
+ * Author: zhuangqh
+ * Description: Ring Menu
+ * Last modify: 2015-10-28
+ */
+
+html, body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#at-plus-container {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	width: 180px;
+	height: 250px;
+	margin-left: -100px;
+}
+
+ul {
+	list-style: none;
+}
+
+/*------info bar-------*/
+#info-bar {
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 105px;
+	top: 150px;
+	border-radius: 50%;
+    background-color: rgba(0, 0, 0, .5);
+    text-align: center;
+    line-height: 130px;
+    color: #38DAA1;
+    font-size: 22pt;
+
+	opacity: 0;
+	-webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+#button:hover #info-bar {
+	top: 0;
+	left: 35px;
+	width: 130px;
+	height: 130px;
+	opacity: 1;
+}
+
+#info-bar li {
+	position: relative;
+}
+
+.infoActive {
+    cursor: pointer;
+}
+
+.button {
+	position: absolute;
+	top: 150px;
+	left: 85px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	opacity: 0;
+	-webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    text-align: center;
+    line-height: 30px;
+    color: #38DAA1;
+}
+
+.active {
+    background-color: rgba(48, 63, 159, 1);
+}
+
+.inactive {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.num {
+	position: absolute;
+	top: -5px;
+	right: -8px;
+	background-color: #EF3636;
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+	font-size: 9pt;
+	font-weight: bold;
+	color: rgba(255, 255, 255, .8);
+}
+
+#button:hover {
+	width: 180px;
+	height: 250px;
+}
+#button:hover #control-ring > li {
+	width: 30px;
+	height: 30px;
+	opacity: 1;
+}
+#button:hover #control-ring li:nth-of-type(1) {
+	top: 110px;
+	left: 15px;
+}
+#button:hover #control-ring li:nth-of-type(2) {
+	top: 148px;
+	left: 5px;
+}
+#button:hover #control-ring li:nth-of-type(3) {
+	top: 185px;
+	left: 20px;
+}
+#button:hover #control-ring li:nth-of-type(4) {
+	top: 210px;
+	left: 50px;
+}
+#button:hover #control-ring li:nth-of-type(5) {
+	top: 210px;
+	left: 95px;
+}
+
+/*--------at plus button----------*/
+.apb {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	left: 85px;
+	top: 150px;
+	cursor: pointer;
+	border-radius: 50%;
+    background: rgba(0, 0, 0, .5) url(../assets/images/atplus_white.png) no-repeat center;
+    -webkit-transition: all .2s .4s;
+    -moz-transition: all .2s .4s;
+    -o-transition: all .2s .4s;
+    transition: all .2s .4s;
+}
+
+#button:hover .apb {
+	width: 50px;
+	height: 50px;
+	left: 75px;
+	top: 140px;
+	background-size: 80% 60%;
+	background-image: url(../assets/images/atplus_green.png);
+	background-color: rgba(48, 63, 159, 1);
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+}
