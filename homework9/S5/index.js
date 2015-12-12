@@ -1,97 +1,177 @@
 /**
- * @Author: zhuangqh
- * @Email: zhuangqhc@gmail.com
- * @Create on: 2015/12/10
- */
+* @Author: zhuangqh
+* @Email: zhuangqhc@gmail.com
+* @Create on: 2015/12/10
+*/
 
-(function ($) {
-    var isActive = [],
-        isOut = false;
 
-    $(function () {
-        $('#button').mouseenter(enterRing).mouseleave(outRing);
-    });
+$(function () {
+    $('#button').mouseenter(enterRing).mouseleave(outRing);
+    $('.apb').click(autoClick);
+});
 
-    function outRing() {
-        isOut = true;
+function outRing() {
+    $('#message').text('');
+    $('#sequence').text('');
+}
+
+function enterRing() {
+    $('.num').hide();
+    $('.button').addClass('active').removeClass('inactive');
+    $('.apb').addClass('curActive');
+    $('#sum').text('');
+}
+
+function ErrorMsg(message, curSum) {
+    this.message = message;
+    this.currentSum = curSum;
+}
+
+// 发生异常将再次请求直到无异常为止
+function autoClick() {
+    enterRing();
+    $(this).off('click').removeClass('curActive');
+    var
+        $buttons = $('.button'),
+        alphabet = ['A', 'B', 'C', 'D', 'E'],
+        randomIndex,
+        len = $buttons.length,
+        sequence = "",
+        funcMap,
+        clickList = [],
+        invokeList = [],
+        callbacks = [],
+        msgList,
+        curSum = 0,
+        i;
+
+    msgList = [
+        '这是一个天大的秘密',
+        '我不知道',
+        '你不知道',
+        '他不知道',
+        '才怪'
+    ];
+
+    funcMap = {
+        'A': aHandler,
+        'B': bHandler,
+        'C': cHandler,
+        'D': dHandler,
+        'E': eHandler
+    };
+
+    // 生成随机序列并显示
+    while (len) {
+        randomIndex = Math.floor(Math.random() * $buttons.length);
+        if ($.inArray(randomIndex, clickList) === -1) {
+            clickList.push(randomIndex);
+            len -= 1;
+            sequence += alphabet[randomIndex];
+        }
     }
+    $('#sequence').text(sequence);
+    len = $buttons.length;
 
-    function enterRing() {
-        isOut = false;
-        isActive = [false, false, false, false, false];
-        $('.num').hide();
-        $('.button').addClass('active').removeClass('inactive');
-        $('.apb').click(autoClick).addClass('curActive');
-        $('#sequence').text('');
-        $('#sum').text('');
+    // 生成函数调用序列
+    for (i = 0; i < len; i += 1) {
+        invokeList.push(funcMap[sequence[i]]);
     }
+    invokeList.push(bubbleHandler); // 最后调用点击大气泡
 
-    function autoClick() {
-        enterRing();
-        $(this).off('click').removeClass('curActive');
-        var
-            $buttons = $('.button'),
-            clickList = [],
-            alphabet = ['A', 'B', 'C', 'D', 'E'],
-            randomIndex,
-            len = $buttons.length,
-            sequence = "";
+    // 生成回调函数并链式调用
+    for (i = 0; i < len; i += 1) {
+        (function (i) {
+            callbacks[i] = function (data) {
+                curSum += parseInt(data);
 
-        // 生成随机序列并显示
-        while (len) {
-            randomIndex = Math.floor(Math.random() * $buttons.length);
-            if ($.inArray(randomIndex, clickList) === -1) {
-                clickList.push(randomIndex);
-                len -= 1;
-                sequence += alphabet[randomIndex];
+                $('#message').text(msgList[clickList[i]]);
+                $('#sum').text(curSum).show();
+
+                $('.button').addClass('active').removeClass('inactive') // 所有按钮激活
+                    .eq(clickList[i]).addClass('inactive').removeClass('active') // 当前按钮灭活
+                    .find('span.num').text(data).show();  // 显示数据
+                exeHandler(i+1);
             }
-        }
-        $('#sequence').text(sequence);
-        len = $buttons.length;
-
-        // 获取数字并触发下一个按钮
-        function getNum(clickIndex) {
-            var
-                $that = $buttons.eq(clickList[clickIndex]),
-                $num = $that.find('span.num');
-
-            $buttons.addClass('inactive').removeClass('active');
-            $that.addClass('active').removeClass('inactive');
-            $num.text('...').show();
-            isActive[$num.attr('id')[3]] = false;
-
-            $.get('/getNumber', function (data) {
-                if (isOut) return;
-                $num.text(data);
-                $buttons.addClass('active').removeClass('inactive');
-                $that.addClass('inactive').removeClass('active');
-                isActive[$num.attr('id')[3]] = true;
-                activeBigRing();
-                if (++clickIndex < len)
-                    getNum(clickIndex);
-            });
-        }
-        getNum(0);
+        })(i);
     }
 
-    function activeBigRing() {
-        var allActive = isActive.every(function (item) {
-                return item;
-            });
-        if (allActive) {
-            computeSum();
+    exeHandler(0);
+    // 执行并递归处理异常
+    function exeHandler(i) {
+        try {
+            invokeList[i](curSum, callbacks[i]);
+        } catch (errMsg) {
+            $('#message').text(errMsg.message);
+            $('#sum').text(errMsg.currentSum);
+            console.log("Error in handler " + alphabet[clickList[i]]);
+            arguments.callee(i);
+        }
+    }
+
+}
+
+function aHandler(curSum, callback) {
+    if (Math.random() > 0.5)
+        throw new ErrorMsg('这不是一个天大的秘密', curSum);
+
+    $('.button').addClass('inactive').removeClass('active') // 所有按钮灭活
+        .eq(0).addClass('active').removeClass('inactive') // 当前按钮激活
+        .find('span.num').text('...').show();  // 显示数据
+
+    $.get('/getNumber', callback);
+}
+
+function bHandler(curSum, callback) {
+    if (Math.random() > 0.5)
+        throw new ErrorMsg('我知道', curSum);
+
+    $('.button').addClass('inactive').removeClass('active') // 所有按钮灭活
+        .eq(1).addClass('active').removeClass('inactive') // 当前按钮激活
+        .find('span.num').text('...').show();  // 显示数据
+
+    $.get('/getNumber', callback);
+}
+
+function cHandler(curSum, callback) {
+    if (Math.random() > 0.5)
+        throw new ErrorMsg('你知道', curSum);
+
+    $('.button').addClass('inactive').removeClass('active') // 所有按钮灭活
+        .eq(2).addClass('active').removeClass('inactive') // 当前按钮激活
+        .find('span.num').text('...').show();  // 显示数据
+
+    $.get('/getNumber', callback);
+}
+
+function dHandler(curSum, callback) {
+    if (Math.random() > 0.5)
+        throw new ErrorMsg('他知道', curSum);
+
+    $('.button').addClass('inactive').removeClass('active') // 所有按钮灭活
+        .eq(3).addClass('active').removeClass('inactive') // 当前按钮激活
+        .find('span.num').text('...').show();  // 显示数据
+
+    $.get('/getNumber', callback);
+}
+
+function eHandler(curSum, callback) {
+    if (Math.random() > 0.5)
+        throw new ErrorMsg('恩', curSum);
+
+    $('.button').addClass('inactive').removeClass('active') // 所有按钮灭活
+        .eq(4).addClass('active').removeClass('inactive') // 当前按钮激活
+        .find('span.num').text('...').show();  // 显示数据
+
+    $.get('/getNumber', callback);
+}
+
+function bubbleHandler(curSum) {
+    setTimeout((function (curSum) {
+        return function () {
+            $('#message').text('楼主异步战斗力感人，目测不超过' + curSum);
             $('.apb').click(autoClick).addClass('curActive');
         }
-    }
+    })(curSum), 1500);
 
-    function computeSum() {
-        var
-            $nums = $('.num'),
-            sum = 0;
-
-        for (var i = 0; i < $nums.length; i += 1) {
-            sum += parseInt($nums.eq(i).text());
-        }
-        $('#sum').text(sum);
-    }
-})(jQuery);
+}

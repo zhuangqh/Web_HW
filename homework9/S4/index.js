@@ -4,94 +4,78 @@
  * @Create on: 2015/12/10
  */
 
-(function ($) {
-    var isActive = [],
-        isOut = false;
 
-    $(function () {
-        $('#button').mouseenter(enterRing).mouseleave(outRing);
-    });
+$(function () {
+    $('#button').mouseenter(enterRing).mouseleave(outRing);
+    $('.apb').click(autoClick);
+});
 
-    function outRing() {
-        isOut = true;
+function outRing() {
+    $('#sequence').text('');
+}
+
+function enterRing() {
+    $('.num').hide();
+    $('.button').addClass('active').removeClass('inactive');
+    $('.apb').addClass('curActive');
+    $('#sum').text('');
+}
+
+function autoClick() {
+    enterRing();
+    $(this).off('click').removeClass('curActive');
+    var
+        $buttons = $('.button'),
+        clickList = [],
+        callbacks = [],
+        alphabet = ['A', 'B', 'C', 'D', 'E'],
+        randomIndex,
+        len = $buttons.length,
+        sequence = "",
+        curSum = 0,
+        i;
+
+    // 生成随机序列并显示
+    while (len) {
+        randomIndex = Math.floor(Math.random() * $buttons.length);
+        if ($.inArray(randomIndex, clickList) === -1) {
+            clickList.push(randomIndex);
+            len -= 1;
+            sequence += alphabet[randomIndex];
+        }
     }
+    $('#sequence').text(sequence);
+    len = $buttons.length;
 
-    function enterRing() {
-        isOut = false;
-        isActive = [false, false, false, false, false];
-        $('.num').hide();
-        $('.button').addClass('active').removeClass('inactive');
-        $('.apb').click(autoClick).addClass('curActive');
-        $('#sequence').text('');
-        $('#sum').text('');
-    }
+    // 获取数字并触发下一个按钮
+    for (i = 0; i < len; i += 1) {
+        (function (i) {
+            callbacks[i] = function (data) {
+                curSum += parseInt(data);
 
-    function autoClick() {
-        enterRing();
-        $(this).off('click').removeClass('curActive');
-        var
-            $buttons = $('.button'),
-            clickList = [],
-            alphabet = ['A', 'B', 'C', 'D', 'E'],
-            randomIndex,
-            len = $buttons.length,
-            sequence = "";
-
-        // 生成随机序列并显示
-        while (len) {
-            randomIndex = Math.floor(Math.random() * $buttons.length);
-            if ($.inArray(randomIndex, clickList) === -1) {
-                clickList.push(randomIndex);
-                len -= 1;
-                sequence += alphabet[randomIndex];
+                $('.button').addClass('active').removeClass('inactive') // 所有按钮激活
+                    .eq(clickList[i]).addClass('inactive').removeClass('active') // 当前按钮灭活
+                    .find('span.num').text(data).show();  // 显示数据
+                if (i + 1 < len)
+                    getNum(clickList[i+1], callbacks[i + 1]);
+                else
+                    activeBigRing(curSum); // 最后激活大气泡
             }
-        }
-        $('#sequence').text(sequence);
-        len = $buttons.length;
-
-        // 获取数字并触发下一个按钮
-        function getNum(clickIndex) {
-            var
-                $that = $buttons.eq(clickList[clickIndex]),
-                $num = $that.find('span.num');
-
-            $buttons.addClass('inactive').removeClass('active');
-            $that.addClass('active').removeClass('inactive');
-            $num.text('...').show();
-            isActive[$num.attr('id')[3]] = false;
-
-            $.get('/getNumber', function (data) {
-                if (isOut) return;
-                $num.text(data);
-                $buttons.addClass('active').removeClass('inactive');
-                $that.addClass('inactive').removeClass('active');
-                isActive[$num.attr('id')[3]] = true;
-                activeBigRing();
-                if (++clickIndex < len)
-                    getNum(clickIndex);
-            });
-        }
-        getNum(0);
+        })(i);
     }
 
-    function activeBigRing() {
-        var allActive = isActive.every(function (item) {
-                return item;
-            });
-        if (allActive) {
-            computeSum();
-            $('.apb').click(autoClick).addClass('curActive');
-        }
-    }
+    getNum(clickList[0], callbacks[0]);
+}
 
-    function computeSum() {
-        var
-            $nums = $('.num'),
-            sum = 0;
+function getNum(clickIndex, callback) {
+    $('.button').addClass('inactive').removeClass('active')
+        .eq(clickIndex).addClass('active').removeClass('inactive')
+        .find('span.num').text('...').show();
 
-        for (var i = 0; i < $nums.length; i += 1) {
-            sum += parseInt($nums.eq(i).text());
-        }
-        $('#sum').text(sum);
-    }
-})(jQuery);
+    $.get('/getNumber', callback);
+}
+
+function activeBigRing(curSum) {
+    $('.apb').click(autoClick).addClass('curActive');
+    $('#sum').text(curSum);
+}

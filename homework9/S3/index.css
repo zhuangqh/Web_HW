@@ -133,13 +133,16 @@ ul {
 	position: absolute;
 	left: 85px;
 	top: 150px;
-	cursor: pointer;
 	border-radius: 50%;
     background: rgba(0, 0, 0, .5) url(../assets/images/atplus_white.png) no-repeat center;
     -webkit-transition: all .2s .4s;
     -moz-transition: all .2s .4s;
     -o-transition: all .2s .4s;
     transition: all .2s .4s;
+}
+
+.curActive {
+	cursor: pointer;
 }
 
 #button:hover .apb {

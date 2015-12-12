@@ -44,6 +44,10 @@ ul {
     transition: all .4s ease-in-out;
 }
 
+.curActive {
+	cursor: pointer;
+}
+
 #button:hover #info-bar {
 	top: 0;
 	left: 35px;
@@ -54,10 +58,6 @@ ul {
 
 #info-bar li {
 	position: relative;
-}
-
-.infoActive {
-    cursor: pointer;
 }
 
 .button {
@@ -137,7 +137,6 @@ ul {
 	position: absolute;
 	left: 85px;
 	top: 150px;
-	cursor: pointer;
 	border-radius: 50%;
     background: rgba(0, 0, 0, .5) url(../assets/images/atplus_white.png) no-repeat center;
     -webkit-transition: all .2s .4s;

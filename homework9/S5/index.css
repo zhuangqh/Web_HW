@@ -10,6 +10,16 @@ html, body {
 	width: 100%;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+#message {
+	position: absolute;
+	left: 50%;
+	width: 180px;
+	bottom: 300px;
+	margin-left: -90px;
+	text-align: center;
+}
+
 #at-plus-container {
 	position: absolute;
 	bottom: 50px;
@@ -51,8 +61,8 @@ ul {
 }
 
 #sequence {
-    font-size: 15pt;
-    margin-top: 10px;
+	font-size: 15pt;
+	margin-top: 10px;
 }
 
 #sum {

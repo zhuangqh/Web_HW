@@ -1,67 +1,60 @@
 /**
- * @Author: zhuangqh
- * @Email: zhuangqhc@gmail.com
- * @Create on: 2015/12/10
- */
+* @Author: zhuangqh
+* @Email: zhuangqhc@gmail.com
+* @Create on: 2015/12/10
+*/
 
-(function ($) {
-    var isActive = [];
 
-    $(function () {
-        $('#button').mouseenter(initRing);
-        $('.apb').click(autoClick);
-    });
+$(function () {
+    $('#button').mouseenter(initRing);
+    $('.apb').click(autoClick);
+});
 
-    function initRing() {
-        isActive = [false, false, false, false, false];
-        $('.num').hide();
-        $('.button').addClass('active').removeClass('inactive');
-        $('#info-bar').removeClass('infoActive');
-        $('#sum').text('');
+function initRing() {
+    $('.num').hide();
+    $('.button').addClass('active').removeClass('inactive');
+    $('.apb').addClass('curActive');
+    $('#sum').text('');
+}
+
+function autoClick() {
+    $('.num').hide();
+    $('#sum').text('');
+    $('.apb').removeClass('curActive').off('click'); // 未完成，禁止再点击@+
+    var
+        $buttons = $('.button'),
+        callbacks = [],
+        curSum = 0;
+
+    for (var i = 0; i < $buttons.length; i += 1) {
+        (function (i) {
+            callbacks[i] = function (data) {
+                curSum += parseInt(data);
+                $buttons.addClass('active').removeClass('inactive') // 所有按钮激活
+                    .eq(i).addClass('inactive').removeClass('active') // 当前按钮灭活
+                    .find('span.num').text(data); // 显示得到的数据
+                if (i < $buttons.length - 1) {
+                    getNum(i + 1, callbacks[i + 1]);
+                } else {
+                    activeBigRing(curSum); // 最后一个按钮得到数据后，点击大气泡
+                }
+            }
+        })(i);
     }
 
-    function autoClick() {
-        var $buttons = $('.button');
-        function getNum(buttonIndex) {
-            var
-                $that = $buttons.eq(buttonIndex),
-                $num = $that.find('span.num');
+    getNum(0, callbacks[0]);
+}
 
-            $buttons.addClass('inactive').removeClass('active');
-            $that.addClass('active').removeClass('inactive');
-            $num.text('...').show();
-            isActive[$num.attr('id')[3]] = false;
+function getNum(buttonIndex, callback) {
+    $('.button').addClass('inactive').removeClass('active')
+        .eq(buttonIndex).addClass('active').removeClass('inactive')
+        .find('span.num').text('...').show();
 
-            $.get('/getNumber', function (data) {
-                $num.text(data);
-                $buttons.addClass('active').removeClass('inactive');
-                $that.addClass('inactive').removeClass('active');
-                isActive[$num.attr('id')[3]] = true;
-                activeBigRing();
-                if (buttonIndex + 1 < $buttons.length)
-                    getNum(buttonIndex + 1);
-            });
-        }
-        getNum(0);
-    }
+    $.get('/getNumber', callback);
+}
 
-    function activeBigRing() {
-        var allActive = isActive.every(function (item) {
-                return item;
-            });
-        if (allActive) {
-            computeSum();
-        }
-    }
-
-    function computeSum() {
-        var
-            $nums = $('.num'),
-            sum = 0;
-
-        for (var i = 0; i < $nums.length; i += 1) {
-            sum += parseInt($nums.eq(i).text());
-        }
-        $('#sum').text(sum);
-    }
-})(jQuery);
+function activeBigRing(curSum) {
+    console.log('done');
+    $('#sum').text(curSum);
+    $('.apb').addClass('curActive').click(autoClick);
+}
