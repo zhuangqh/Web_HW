@@ -29,6 +29,12 @@ function autoClick() {
     for (var i = 0; i < $buttons.length; i += 1) {
         (function (i) {
             callbacks[i] = function (data) {
+                // 判断是否已经退出@+
+                if (!$('#info-bar:visible').length) {
+                    $('.apb').click(autoClick);
+                    return;
+                }
+
                 curSum += parseInt(data);
                 $buttons.addClass('active').removeClass('inactive') // 所有按钮激活
                     .eq(i).addClass('inactive').removeClass('active') // 当前按钮灭活

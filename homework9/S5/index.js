@@ -83,6 +83,12 @@ function autoClick() {
     for (i = 0; i < len; i += 1) {
         (function (i) {
             callbacks[i] = function (data) {
+                // 判断是否已经退出@+
+                if (!$('#info-bar:visible').length) {
+                    $('.apb').click(autoClick);
+                    return;
+                }
+
                 curSum += parseInt(data);
 
                 $('#message').text(msgList[clickList[i]]);

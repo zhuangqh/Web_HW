@@ -32,6 +32,12 @@ function getNum() {
     isActive[$num.attr('id')[3]] = false;
 
     $.get('/getNumber', function (data) {
+        // 判断是否已经退出@+
+        if (!$('#info-bar:visible').length) {
+            $buttons.click(getNum);
+            return;
+        }
+
         $num.text(data);
         $buttons.addClass('active').removeClass('inactive').click(getNum);
         $that.addClass('inactive').removeClass('active').off('click');
