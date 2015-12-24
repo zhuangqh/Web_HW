@@ -1,0 +1,29 @@
+body, html {
+    margin: 0;
+}
+
+#details {
+    width: 250px;
+    -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
+    -moz-box-shadow: 0 0 20px 5px #EEEEEE;
+    box-shadow: 0 0 20px 5px #EEEEEE;
+    border: #B5C4CF solid 1px;
+    border-radius: 10px;
+    margin: 30px auto 0 auto;
+    background-color: #DFF0FF;
+    color: #4398D8;
+}
+
+#details > p {
+    text-align: center;
+    font-size: 13pt;
+}
+
+#field {
+    width: 200px;
+    margin: auto;
+}
+
+#field p {
+    text-align: left;
+}

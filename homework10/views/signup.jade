@@ -1,0 +1,43 @@
+//
+   Created by z on 2015/12/24.
+
+extends layout
+
+block content
+  #wrapper
+    form(action='/regist', method='post')
+      label(for='username') 用户名
+      input#username(name='username', value=user.username, placeholder="6~18位英文字母、数字或下划线，英文字母开头")
+
+      label(for='password') 密码
+      input#password(name='password', placeholder="6~12位数字、字母、中划线、下划线，字母开头", type='password')
+
+      label(for='repeatPassword') 重复密码
+      input#repeatPassword(name='repeatPassword', placeholder="重复密码", type='password')
+
+      label(for='studentId') 学号
+      input#studentId(name='studentId', value=user.studentId, placeholder="8位非零开头数字")
+
+      label(for='phone') 电话
+      input#phone(name='phone', value=user.phone, placeholder="11位非零开头数字")
+
+      label(for='mail') 邮箱
+      input#mail(name='mail', value=user.mail, placeholder="邮箱地址")
+
+      input#reset.button(value='重置', type='reset')
+      input#submit.button(value='提交', type='submit')
+  #error
+    p#usernameErr 用户名不合法，请重新输入
+    p#passwordErr 密码不合法，请重新输入
+    p#repeatPasswordErr 两次密码不一致
+    p#studentIdErr 学号不合法，请重新输入
+    p#phoneErr 电话不合法，请重新输入
+    p#mailErr 邮箱不合法，请重新输入
+
+    p#usernameDup 用户名已存在
+    p#studentIdDup 学号已存在
+    p#phoneDup 电话已存在
+    p#mailDup 邮箱已存在
+
+  script(type="text/javascript", src="javascripts/validator.js")
+  script(type="text/javascript", src="javascripts/signup.js")
