@@ -14,6 +14,16 @@ var validator = {
     mailStatus: false
   },
 
+  isFormatError: function (user) {
+    for (var key in user) {
+      if (user.hasOwnProperty(key)) {
+        if (!validator.isFieldValid(key, user[key]))
+          return true;
+      }
+    }
+    return false;
+  },
+
   isUsernameValid: function (username){
     return this.form.usernameStatus = /^[a-zA-Z][a-zA-Z0-9_]{5,18}$/.test(username);
   },

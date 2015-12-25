@@ -1,0 +1,16 @@
+//
+   Created by z on 2015/12/25.
+
+extends layout
+
+block content
+  #wrapper
+    form(action='/signin', method='post')
+      label(for='username') 用户名
+      input#username(name='username', value=user.username)
+
+      label(for='password') 密码
+      input#password(name='password', type='password')
+  if error
+    #error
+      p #{error}

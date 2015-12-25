@@ -12,7 +12,9 @@
     "express": "~4.13.1",
     "express-session": "^1.12.1",
     "jade": "~1.11.0",
+    "mongodb": "^2.1.2",
     "morgan": "~1.6.1",
+    "node-inspector": "^0.12.5",
     "serve-favicon": "~2.3.0",
     "session-file-store": "0.0.24"
   }
