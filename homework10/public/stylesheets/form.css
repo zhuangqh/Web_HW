@@ -50,13 +50,28 @@ form {
     height: 30px;
 }
 
-#reset, #submit {
-    width: 135px;
+#reset, #submit, .bottomBtn {
     height: 30px;
     color: #FFFFFF;
     font-size: 13pt;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#reset, #submit {
+    width: 135px;
+}
+
+.bottomBtn {
+    display: block;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0097A7;
+}
+
+a {
+    text-decoration: none;
 }
 
 #reset {

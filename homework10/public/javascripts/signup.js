@@ -21,17 +21,21 @@ $(function () {
 function valid() {
   var self = this;
   if (validator.isFieldValid(this.id, $(this).val())) {
-    $.post('/api/validate-unique', {field: this.id, value: $(this).val()}, function (data, status) {
-      if (status === 'success') {
-        if (data.isUnique) {
-          getEleByFunc('Dup', self.id).hide();
-        } else {
-          validator.form[self.id + 'Status'] = false;
-          getEleByFunc('Dup', self.id).show();
+    // ajax 询问服务器键值是否唯一
+    if (this.id !== 'password' && this.id !== 'repeatPassword')
+      $.post('/api/validate-unique', {field: this.id, value: $(this).val()}, function (data, status) {
+        if (status === 'success') {
+          console.log(data);
+          if (data.isUnique) {
+            getEleByFunc('Dup', self.id).hide();
+          } else {
+            validator.form[self.id + 'Status'] = false;
+            getEleByFunc('Dup', self.id).show();
+          }
         }
-      }
-      switchError();
-    });
+        switchError();
+      });
+
     getEleByFunc('Err', this.id).hide();
   } else {
     getEleByFunc('Err', this.id).show();

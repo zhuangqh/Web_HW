@@ -10,3 +10,8 @@ block content
       p 学号:#{user.studentId}
       p 电话:#{user.phone}
       p 邮箱:#{user.mail}
+      a(href='/signout')
+        input#signout(type='button', value='退出')
+  if errorMsg
+    #remind
+      p #{errorMsg}

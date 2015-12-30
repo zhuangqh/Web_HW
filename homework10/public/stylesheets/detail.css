@@ -2,7 +2,7 @@ body, html {
     margin: 0;
 }
 
-#details {
+#details, #remind {
     width: 250px;
     -webkit-box-shadow: 0 0 20px 5px #EEEEEE;
     -moz-box-shadow: 0 0 20px 5px #EEEEEE;
@@ -12,6 +12,12 @@ body, html {
     margin: 30px auto 0 auto;
     background-color: #DFF0FF;
     color: #4398D8;
+}
+
+#remind {
+    background-color: #FFF6F6;
+    color: #9C4240;
+    text-align: center;
 }
 
 #details > p {
@@ -26,4 +32,14 @@ body, html {
 
 #field p {
     text-align: left;
+}
+
+#signout {
+    width: 135px;
+    height: 30px;
+    color: #FFFFFF;
+    font-size: 13pt;
+    display: block;
+    margin: 0 auto 10px auto;
+    background-color: #e63145;
 }

@@ -11,6 +11,11 @@ block content
 
       label(for='password') 密码
       input#password(name='password', type='password')
+
+      input#reset.button(value='重置', type='reset')
+      input#submit.button(value='提交', type='submit')
+      a(href='/regist')
+        input.bottomBtn(type='button', value='注册')
   if error
-    #error
+    #remind
       p #{error}

@@ -4,18 +4,17 @@
  * Module dependencies.
  */
 
-var debug = require('debug')('hw10:server');
+
+var debug = require('debug')('signin:server');
 var http = require('http');
-var mongo = require('mongodb').MongoClient;
+var mongodb = require('mongodb').MongoClient;
 
 var mongourl = 'mongodb://localhost:27017/signin';
 
-mongo.connect(mongourl).catch(function (error) {
-  debug('Connect to mongodb ' + mongourl + 'was failed with error: ', error);
+mongodb.connect(mongourl).catch(function (error) {
+  debug('Connect to mongodb' + mongourl + 'was failed with error: ', error);
 }).then(function (db) {
   var app = require('../app')(db);
-
-
   /**
    * Get port from environment and store in Express.
    */
@@ -67,8 +66,8 @@ mongo.connect(mongourl).catch(function (error) {
     }
 
     var bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+      ? 'Pipe ' + port
+      : 'Port ' + port;
 
     // handle specific listen errors with friendly messages
     switch (error.code) {
@@ -92,8 +91,8 @@ mongo.connect(mongourl).catch(function (error) {
   function onListening() {
     var addr = server.address();
     var bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
     debug('Listening on ' + bind);
   }
 });

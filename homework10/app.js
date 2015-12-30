@@ -9,7 +9,6 @@ var FileStore = require('session-file-store')(session);
 
 module.exports = function (db) {
   var routes = require('./routes/index')(db);
-
   var app = express();
 
   // view engine setup
@@ -27,7 +26,8 @@ module.exports = function (db) {
     store: new FileStore(),
     resave: false,
     saveUninitialized: false,
-    secret: 'homework 10'
+    secret: 'homework 10',
+    cookie: {maxAge: 86400000}
   }));
 
 
@@ -63,4 +63,6 @@ module.exports = function (db) {
       error: {}
     });
   });
+
+  return app;
 };
