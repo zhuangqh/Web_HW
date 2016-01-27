@@ -1,0 +1,26 @@
+//
+   Created by z on 2016/1/27.
+
+
+#wrapper
+  form(name="form", ng-submit="submitData()", novalidate)
+    label(for='username') 用户名
+    input#username(name='username', placeholder="6~18位英文字母、数字或下划线，英文字母开头", required, ng-model="user.username", ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{5,18}$/")
+
+    label(for='password') 密码
+    input#password(name='password', placeholder="6~12位数字、字母、中划线、下划线，字母开头", type='password', required, ng-model="user.password", ng-pattern="/^[a-zA-Z][a-zA-Z0-9_\-]{5,12}$/")
+
+    label(for='repeatPassword') 重复密码
+    input#repeatPassword(name='repeatPassword', placeholder="重复密码", type='password', required, ng-model="user.repeatPassword")
+
+    input#reset.button(value='重置', ng-click="resetForm()", type='button')
+    input#submit.button(value='提交', ng-disabled="checkForm()", type='submit')
+
+    a(href='/signIn')
+      input.bottomBtn(type='button', value='登录')
+#error
+  p(ng-show="check('username')")#usernameErr 用户名不合法
+  p(ng-show="check('password')")#passwordErr 密码不合法
+  p(ng-show="checkDupPassword()")#repeatPasswordErr 两次密码不一致
+
+  p(ng-show="!isUnique")#usernameDup 用户名已存在

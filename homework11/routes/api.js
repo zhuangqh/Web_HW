@@ -13,10 +13,23 @@ var data = {
     {
       "title": "Sed egestas",
       "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+    },
+    {
+      "title": "Sed egestas",
+      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+    },
+    {
+      "title": "Sed egestas",
+      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
+    },
+    {
+      "title": "Sed egestas",
+      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
     }
   ]
 };
 
+var users = {};
 // GET
 
 exports.posts = function (req, res) {
@@ -44,11 +57,60 @@ exports.post = function (req, res) {
   }
 };
 
+exports.checkUnique = function (req, res) {
+  var data = {};
+  if (Math.random() > 0.5) {
+    data.isUnique = true;
+  } else {
+    data.isUnique = false;
+  }
+  data.isUnique = true;
+  res.send(data);
+};
+
+exports.hasLogin = function (req, res) {
+  console.log('fuck' + req.session.user);
+  var data = {};
+  if (users.hasOwnProperty(req.session.user.username)) {
+    data.isLogin = true;
+  } else {
+    data.isLogin = false;
+  }
+  res.send(data);
+};
+
 // POST
 
 exports.addPost = function (req, res) {
   data.posts.push(req.body);
   res.json(req.body);
+};
+
+exports.regist = function (req, res) {
+  console.log('======================');
+  var user = req.body;
+  users[user.username] = user;
+  console.log(users);
+  req.session.user = user;
+  res.send({});
+};
+
+exports.login = function (req, res) {
+  console.log(users);
+  var user = req.body;
+  console.log(user);
+  var data = {
+    usernameExist: true,
+    passwordError: false
+  };
+  if (!users.hasOwnProperty(user.username)) {
+    console.log('haha1');
+    data.usernameExist = false;
+  } else if (users[user.username].password != user.password) {
+    console.log('ahaha2');
+    data.passwordError = true;
+  }
+  res.send(data);
 };
 
 // PUT

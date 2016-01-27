@@ -3,10 +3,18 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.
+    var when2 = $routeProvider.
       when('/', {
         templateUrl: 'partials/index',
         controller: IndexCtrl
+      }).
+      when('/signUp', {
+        templateUrl: 'partials/signUp',
+        controller: SignUpCtrl
+      }).
+      when('/signIn', {
+        templateUrl: 'partials/signIn',
+        controller: SignInCtrl
       }).
       when('/addPost', {
         templateUrl: 'partials/addPost',
