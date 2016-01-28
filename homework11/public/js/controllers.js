@@ -81,6 +81,7 @@ function SignInCtrl($scope, $http, $location) {
   $scope.usernameExist = true;
   $scope.passwordError = false;
 
+  // 错误有优先级，优先“用户名不存在”
   $scope.submit = function () {
     $http.post('/api/login', $scope.user).
       success(function (res) {
