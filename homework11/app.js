@@ -55,6 +55,7 @@ app.get('/api/checkUnique', api.checkUnique);
 app.get('/api/hasLogin', api.hasLogin);
 app.post('/api/regist', api.regist);
 app.post('/api/login', api.login);
+app.post('/api/logout', api.logout);
 
 // JSON API
 

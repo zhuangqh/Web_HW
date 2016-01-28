@@ -52,6 +52,16 @@ html, body {
 
 /* stylesheet of post */
 
+#logout {
+    position: fixed;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    top: 0;
+    right: 10px;
+    color: #F44336;
+}
+
 .post {
     margin-top: 15px;
     border: solid 1px #757575;
@@ -82,4 +92,32 @@ html, body {
 
 .post-control ul li:first-child {
     margin-left: 20px;
+}
+
+/* common style of button */
+
+.c-button {
+    height: 30px;
+    background-color: #0288D1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* detail of post */
+
+.post-author {
+    float: right;
+    position: relative;
+    top: -40px;
+    right: 20px;
+}
+
+.post-author-name {
+    color: #263238;
+    font-weight: bold;
+}
+
+.post-detail {
+    clear: both;
 }

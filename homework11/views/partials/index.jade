@@ -1,8 +1,9 @@
+a#logout(ng-show="hasLogin", ng-click="logout()") logout
 p There are {{posts.length}} posts
 div.post(ng-repeat='post in posts')
   div.post-outline
     h3 {{post.title}}
-    p {{post.text}}
+    p {{post.text | cut: 50}}
   div.post-control
     ul
       li

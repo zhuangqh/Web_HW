@@ -8,22 +8,27 @@ var data = {
   "posts": [
     {
       "title": "Lorem ipsum",
+      "author": "zhuangqh",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
       "title": "Sed egestas",
+      "author": "zhuangqh",
       "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
     },
     {
       "title": "Sed egestas",
+      "author": "zhuangqh",
       "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
     },
     {
       "title": "Sed egestas",
+      "author": "zhuangqh",
       "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
     },
     {
       "title": "Sed egestas",
+      "author": "zhuangqh",
       "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
     }
   ]
@@ -37,8 +42,9 @@ exports.posts = function (req, res) {
   data.posts.forEach(function (post, i) {
     posts.push({
       id: i,
+      author: post.author,
       title: post.title,
-      text: post.text.substr(0, 50) + '...'
+      text: post.text
     });
   });
   res.json({
@@ -71,7 +77,7 @@ exports.checkUnique = function (req, res) {
 exports.hasLogin = function (req, res) {
   console.log('fuck' + req.session.user);
   var data = {};
-  if (users.hasOwnProperty(req.session.user.username)) {
+  if (!!req.session.user && users.hasOwnProperty(req.session.user.username)) {
     data.isLogin = true;
   } else {
     data.isLogin = false;
@@ -110,7 +116,13 @@ exports.login = function (req, res) {
     console.log('ahaha2');
     data.passwordError = true;
   }
+  req.session.user = user;
   res.send(data);
+};
+
+exports.logout = function (req, res) {
+  delete req.session.user;
+  res.send(true);
 };
 
 // PUT

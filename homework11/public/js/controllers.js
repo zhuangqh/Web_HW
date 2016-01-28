@@ -3,10 +3,12 @@
 /* Controllers */
 
 function IndexCtrl($scope, $http, $location) {
+  $scope.hasLogin = false;
   // 登录之后才可查看内容
   $http.get('/api/hasLogin').
     success(function (data) {
       if (data.isLogin) {
+        $scope.hasLogin = true;
         $http.get('/api/posts').
           success(function(data, status, headers, config) {
             $scope.posts = data.posts;
@@ -15,6 +17,14 @@ function IndexCtrl($scope, $http, $location) {
         $location.url('/signIn');
       }
     });
+
+  // 登出
+  $scope.logout = function () {
+    $http.post('/api/logout').
+        success(function () {
+      $location.url('/signIn');
+    });
+  }
 }
 
 function SignUpCtrl($scope, $http, $location) {
