@@ -2,40 +2,6 @@
  * Serve JSON to our AngularJS client
  */
 
-// For a real app, you'd make database requests here.
-// For this example, "data" acts like an in-memory "database"
-var data = {
-  "posts": [
-    {
-      "title": "Lorem ipsum",
-      "author": "zhuangqh",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      "title": "Sed egestas",
-      "author": "zhuangqh",
-      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
-    },
-    {
-      "title": "Sed egestas",
-      "author": "zhuangqh",
-      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
-    },
-    {
-      "title": "Sed egestas",
-      "author": "zhuangqh",
-      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
-    },
-    {
-      "title": "Sed egestas",
-      "author": "zhuangqh",
-      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
-    }
-  ]
-};
-
-var users = {};
-
 var express = require('express'),
     router = express.Router(),
     debug = require('debug')('blog:api');
@@ -46,29 +12,26 @@ module.exports = function (db) {
 
   // GET
   router.get('/posts', function (req, res) {
-    var posts = [];
-    data.posts.forEach(function (post, i) {
-      posts.push({
-        id: i,
-        author: post.author,
-        title: post.title,
-        text: post.text
-      });
-    });
-    res.json({
-      posts: posts
-    });
+    blogManager.getAllPosts()
+        .then(function (posts) {
+          res.send(posts);
+        })
+        .catch(function () {
+          debug('fail to get all post');
+          res.json(false);
+        });
   });
 
   router.get('/post/:id', function (req, res) {
     var id = req.params.id;
-    if (id >= 0 && id < data.posts.length) {
-      res.json({
-        post: data.posts[id]
-      });
-    } else {
-      res.json(false);
-    }
+
+    blogManager.findPostById(id)
+        .then(function (post) {
+          res.send(post);
+        })
+        .catch(function () {
+          debug('fail to get post ' + id);
+        });
   });
 
   router.post('/checkUnique', function (req, res) {
@@ -85,13 +48,22 @@ module.exports = function (db) {
   router.get('/hasLogin', function (req, res) {
     var data = {};
     data.isLogin = (req.session && req.session.user);
+    if (data.isLogin)
+      data.username = req.session.user.username;
     res.send(data);
   });
 
   // POST
   router.post('/post', function (req, res) {
-    data.posts.push(req.body);
-    res.json(req.body);
+    var post = req.body;
+    post.author = req.session.user.username;
+    blogManager.addPost(post)
+        .then(function () {
+          res.json(req.body);
+        })
+        .catch(function (error) {
+          debug('error in add post', error);
+        });
   });
 
   router.post('/regist', function (req, res) {
@@ -107,12 +79,11 @@ module.exports = function (db) {
           debug('Error occurs in regist');
           res.send({});
         });
-    users[user.username] = user;
   });
 
   router.post('/login', function (req, res) {
     var user = req.body;
-    console.log(user);
+    debug(user, ' about to login');
     blogManager.checkPassword(user)
         .then(function () {
           req.session.user = user;
@@ -131,26 +102,31 @@ module.exports = function (db) {
 
   // PUT
   router.put('/post/:id', function (req, res) {
-    var id = req.params.id;
+    var id = req.params.id,
+        newPost = req.body;
 
-    if (id >= 0 && id < data.posts.length) {
-      data.posts[id] = req.body;
-      res.json(true);
-    } else {
-      res.json(false);
-    }
+    blogManager.editPostById(id, newPost)
+        .then(function () {
+          res.json(true);
+        })
+        .catch(function () {
+          debug('fail to update post');
+          res.json(false);
+        });
   });
 
   // DELETE
   router.delete('/post/:id', function (req, res) {
     var id = req.params.id;
 
-    if (id >= 0 && id < data.posts.length) {
-      data.posts.splice(id, 1);
-      res.json(true);
-    } else {
-      res.json(false);
-    }
+    blogManager.deletePostById(id)
+        .then(function () {
+          res.json(true);
+        })
+        .catch(function () {
+          debug('fail to delete post ' + id);
+          res.json(false);
+        });
   });
 
   return router;

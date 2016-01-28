@@ -7,8 +7,19 @@
 var debug = require('debug')('blog:manager'),
     bcrypt = require('bcrypt-nodejs');
 
+
 module.exports = function (db) {
   var users = db.collection('users');
+  var posts = db.collection('posts');
+  var numOfPost = 0;
+
+  posts.stats(function (err, stats) {
+    if (stats) {
+      numOfPost = stats.count;
+    }
+    debug('There are ' + numOfPost + ' post in database');
+  });
+
 
   return {
     // 查询用户是否存在
@@ -31,6 +42,7 @@ module.exports = function (db) {
       });
     },
 
+    // 验证密码是否正确
     checkPassword: function (user) {
       return users.findOne({username: user.username}).then(function (ans) {
         return new Promise(function (resolve, reject) {
@@ -40,6 +52,54 @@ module.exports = function (db) {
           });
         });
       });
+    },
+
+    // 增加一条博客
+    addPost: function (post) {
+      // 增加唯一标识
+      post.id = numOfPost++;
+      debug('a post add', post);
+      return posts.insert(post);
+    },
+
+    // 根据id查询博客
+    findPostById: function (id) {
+      id = parseInt(id);
+      return posts.findOne({'id': id}).then(function (post) {
+        return post ? Promise.resolve(post) : Promise.reject();
+      });
+    },
+
+    listPost: function () {
+      return posts.find().toArray().then(function (ans) {
+        debug('The post in database', ans);
+        return Promise.resolve();
+      });
+    },
+
+    editPostById: function (id, newPost) {
+      id = parseInt(id);
+      return posts.findOne({'id': id}).then(function (post) {
+        newPost._id = post._id;
+        debug('the new one is ', newPost);
+        return posts.save(newPost);
+      });
+    },
+
+    // 获取所有博客
+    getAllPosts: function () {
+      return posts.find().toArray().then(function (ans) {
+        ans.forEach(function (post) {
+          delete post._id;
+        });
+        debug('All post is ', ans);
+        return Promise.resolve(ans);
+      });
+    },
+
+    deletePostById: function (id) {
+      id = parseInt(id);
+      return posts.deleteOne({'id': id});
     }
   };
 };

@@ -48,6 +48,7 @@ html, body {
 #content {
     width: 500px;
     margin: 80px auto 0 auto;
+    word-wrap:break-word;
 }
 
 /* stylesheet of post */
@@ -120,4 +121,8 @@ html, body {
 
 .post-detail {
     clear: both;
+}
+
+.lowerFont {
+    font-weight: lighter;
 }
