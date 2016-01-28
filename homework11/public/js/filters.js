@@ -2,7 +2,7 @@
 
 /* Filters */
 
-angular.module('myApp.filters', []).
+angular.module('myApp.filter1', []).
   filter('cut', function () {
     return function (value, max) {
       if (!value) return '';
@@ -15,3 +15,15 @@ angular.module('myApp.filters', []).
       return value + ' ...';
     }
   });
+
+angular.module('myApp.filter2', []).
+filter('togglePost', function () {
+  return function (value, status) {
+    if (status) {
+      return value;
+    } else {
+      value = '该内容已被管理员隐藏';
+      return value;
+    }
+  }
+});

@@ -115,7 +115,20 @@ module.exports = function (db) {
           debug('fail to add comment');
           res.json(false);
         });
-    blogManager.listPost();
+  });
+
+  router.post('/togglePost/:id', function (req, res) {
+    var id = req.params.id;
+    var status = req.body.curStatus;
+
+    blogManager.togglePost(id, status)
+        .then(function () {
+          res.json(true);
+        })
+        .catch(function () {
+          debug('fail to toggle post');
+          res.json(false);
+        });
   });
 
   // PUT

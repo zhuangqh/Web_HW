@@ -5,6 +5,7 @@
 function IndexCtrl($scope, $http, $location) {
   $scope.hasLogin = false;
   $scope.username = "";
+
   // 登录之后才可查看内容
   $http.get('/api/hasLogin').
     success(function (data) {
@@ -27,7 +28,19 @@ function IndexCtrl($scope, $http, $location) {
         success(function () {
       $location.url('/signIn');
     });
-  }
+  };
+
+  // 显示或隐藏博客
+  $scope.togglePost = function (id, status) {
+
+    $http.post('/api/togglePost/' + id, {curStatus: status})
+        .success(function () {
+          $http.get('/api/posts').
+          success(function(data) {
+            $scope.posts = data;
+          });
+        });
+  };
 }
 
 function SignUpCtrl($scope, $http, $location) {
@@ -109,6 +122,7 @@ function SignInCtrl($scope, $http, $location) {
 
 function AddPostCtrl($scope, $http, $location) {
   $scope.form = {};
+  $scope.form.show = true;
   $scope.submitPost = function () {
     $http.post('/api/post', $scope.form).
       success(function(data) {
@@ -159,7 +173,7 @@ function DeletePostCtrl($scope, $http, $location, $routeParams) {
 
 function AddCommentCtrl ($scope, $http, $location, $routeParams) {
   $scope.form = {};
-
+  $scope.form.show = true;
   $scope.submitComment = function () {
     $http.post('/api/addComment/' + $routeParams.id, $scope.form).
         success(function (data) {

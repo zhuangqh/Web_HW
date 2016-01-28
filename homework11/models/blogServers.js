@@ -106,6 +106,12 @@ module.exports = function (db) {
     addComment: function (id, comment) {
       id = parseInt(id);
       return posts.updateOne({'id': id}, {$push: {'comments': comment}});
+    },
+
+    // 显示或隐藏博客
+    togglePost: function (id, status) {
+      id = parseInt(id);
+      return posts.updateOne({'id': id}, {$set: {show: !status}});
     }
   };
 };

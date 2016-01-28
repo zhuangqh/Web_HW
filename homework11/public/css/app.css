@@ -87,6 +87,10 @@ html, body {
     line-height: 40px;
 }
 
+ol {
+    list-style: none;
+}
+
 .post-control ul li {
     margin-left: 50px;
     float: left;
@@ -124,7 +128,7 @@ html, body {
 }
 
 .post-comments .post-comment:last-child .comment-detail {
-    border-width: 0;
+     border-width: 0;
 }
 
 /* common style of button */
@@ -157,4 +161,14 @@ html, body {
 
 .lowerFont {
     font-weight: lighter;
+}
+
+/* stylesheet of search box */
+#search {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 12pt;
 }

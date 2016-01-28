@@ -1,13 +1,15 @@
 a#logout(ng-show="hasLogin", ng-click="logout()") logout
-p There are {{posts.length}} posts
-div.post(ng-repeat='post in posts')
+p Current User: {{username}}
+p There are {{posts.length}} posts in blog
+input#search(type='text', placeholder='search', ng-model='search')
+div.post(ng-repeat='post in posts | filter: search')
   div.post-outline
     h3 {{post.title}}
       span.lowerFont  post by:
       span.post-author-name  {{post.author}}
-    p {{post.text | cut: 50}}
+    p {{post.text | cut: 50 | togglePost: post.show}}
   div.post-control
-    ul
+    ul(ng-show="username != 'administrator'")
       li
         a(href='/readPost/{{post.id}}') More
       li
@@ -16,8 +18,16 @@ div.post(ng-repeat='post in posts')
         a(href='/deletePost/{{post.id}}', ng-show="post.author == username") Delete
       li
         a(href='/addComment/{{post.id}}') Comment
+    ol(ng-show="username == 'administrator'")
+      li
+        a(href='#', ng-show="!post.show", ng-click="togglePost(post.id, false)") show
+      li
+        a(href='#', ng-show="post.show", ng-click="togglePost(post.id, true)") hide
+
   div.post-comments
     div(ng-show="post.comments.length").comment-title comments
     div.post-comment(ng-repeat='comment in post.comments')
       p.comment-author {{comment.author}}
       p.comment-detail {{comment.text}}
+
+div.paging
