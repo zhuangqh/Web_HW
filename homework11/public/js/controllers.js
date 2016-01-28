@@ -55,7 +55,7 @@ function SignUpCtrl($scope, $http, $location) {
   };
   // 服务器查询用户名是否重复
   $scope.$watch('user.username', function(newVal, oldVal) {
-    $http.get('/api/checkUnique').
+    $http.post('/api/checkUnique', {username: $scope.user.username}).
       success(function(result) {
         $scope.isUnique = result.isUnique;
       });
@@ -81,15 +81,21 @@ function SignInCtrl($scope, $http, $location) {
   $scope.usernameExist = true;
   $scope.passwordError = false;
 
-  // 错误有优先级，优先“用户名不存在”
+  $scope.$watch('user.username', function(newVal, oldVal) {
+      $http.post('/api/checkUnique', {username: $scope.user.username}).
+      success(function(result) {
+        if ($scope.user.username)
+          $scope.usernameExist = !result.isUnique;
+        else
+          $scope.usernameExist = true;
+      });
+  }, true);
+
+  // 请求登录
   $scope.submit = function () {
     $http.post('/api/login', $scope.user).
       success(function (res) {
-        $scope.usernameExist = true;
-        $scope.passwordError = false;
-        if (!res.usernameExist) {
-          $scope.usernameExist = false;
-        } else if (res.passwordError) {
+        if (res.passwordError) {
           $scope.passwordError = true;
         } else {
           $location.url('/');

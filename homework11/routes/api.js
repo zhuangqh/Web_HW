@@ -71,25 +71,20 @@ module.exports = function (db) {
     }
   });
 
-  router.get('/checkUnique', function (req, res) {
-    var data = {};
-    if (Math.random() > 0.5) {
-      data.isUnique = true;
-    } else {
-      data.isUnique = false;
-    }
-    data.isUnique = true;
-    res.send(data);
+  router.post('/checkUnique', function (req, res) {
+    var user = req.body;
+    blogManager.checkUserUnique(user.username)
+        .then(function () {
+          res.send({isUnique: true});
+        })
+        .catch(function () {
+          res.send({isUnique: false});
+        });
   });
 
   router.get('/hasLogin', function (req, res) {
-    console.log('fuck' + req.session.user);
     var data = {};
-    if (!!req.session.user && users.hasOwnProperty(req.session.user.username)) {
-      data.isLogin = true;
-    } else {
-      data.isLogin = false;
-    }
+    data.isLogin = (req.session && req.session.user);
     res.send(data);
   });
 
@@ -100,31 +95,33 @@ module.exports = function (db) {
   });
 
   router.post('/regist', function (req, res) {
-    console.log('======================');
     var user = req.body;
+    debug('about to regist', user);
+
+    blogManager.createUser(user)
+        .then(function () {
+          req.session.user = user;
+          res.send({});
+        })
+        .catch(function (error) {
+          debug('Error occurs in regist');
+          res.send({});
+        });
     users[user.username] = user;
-    console.log(users);
-    req.session.user = user;
-    res.send({});
   });
 
   router.post('/login', function (req, res) {
-    console.log(users);
     var user = req.body;
     console.log(user);
-    var data = {
-      usernameExist: true,
-      passwordError: false
-    };
-    if (!users.hasOwnProperty(user.username)) {
-      console.log('haha1');
-      data.usernameExist = false;
-    } else if (users[user.username].password != user.password) {
-      console.log('ahaha2');
-      data.passwordError = true;
-    }
-    req.session.user = user;
-    res.send(data);
+    blogManager.checkPassword(user)
+        .then(function () {
+          req.session.user = user;
+          res.send({passwordError: false});
+        })
+        .catch(function () {
+          debug("user's password is wrong.");
+          res.send({passwordError: true});
+        });
   });
 
   router.post('/logout', function (req, res) {
