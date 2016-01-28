@@ -156,3 +156,14 @@ function DeletePostCtrl($scope, $http, $location, $routeParams) {
     $location.url('/');
   };
 }
+
+function AddCommentCtrl ($scope, $http, $location, $routeParams) {
+  $scope.form = {};
+
+  $scope.submitComment = function () {
+    $http.post('/api/addComment/' + $routeParams.id, $scope.form).
+        success(function (data) {
+        $location.url('/');
+      });
+  }
+}

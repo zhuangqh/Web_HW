@@ -56,6 +56,7 @@ module.exports = function (db) {
   // POST
   router.post('/post', function (req, res) {
     var post = req.body;
+    post.comments = [];
     post.author = req.session.user.username;
     blogManager.addPost(post)
         .then(function () {
@@ -98,6 +99,23 @@ module.exports = function (db) {
   router.post('/logout', function (req, res) {
     delete req.session.user;
     res.send(true);
+  });
+
+  router.post('/addComment/:id', function (req, res) {
+    var id = req.params.id;
+    var comment = req.body;
+    comment.author = req.session.user.username;
+
+    debug('comment is ', comment);
+    blogManager.addComment(id, comment)
+        .then(function () {
+          res.json(true);
+        })
+        .catch(function () {
+          debug('fail to add comment');
+          res.json(false);
+        });
+    blogManager.listPost();
   });
 
   // PUT

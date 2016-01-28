@@ -100,6 +100,12 @@ module.exports = function (db) {
     deletePostById: function (id) {
       id = parseInt(id);
       return posts.deleteOne({'id': id});
+    },
+
+    // 添加评论
+    addComment: function (id, comment) {
+      id = parseInt(id);
+      return posts.updateOne({'id': id}, {$push: {'comments': comment}});
     }
   };
 };

@@ -2,4 +2,10 @@ section
   h3 {{post.title}}
   div.post-author post by:
     span.post-author-name  {{post.author}}
+
   div.post-detail {{post.text}}
+  div.post-comments
+    div(ng-show="post.comments.length").comment-title comments
+    div.post-comment(ng-repeat='comment in post.comments')
+      p.comment-author {{comment.author}}
+      p.comment-detail {{comment.text}}
